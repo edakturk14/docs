@@ -12,7 +12,7 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "⏩ Home",
+        "tab": "Home",
         "groups": [
           {
             "group": "Introduction",
@@ -37,15 +37,47 @@
                   "docs/protocol/warp-routes/warp-routes-example-usage"
                 ]
               },
-              "docs/reference/applications/interchain-account"
+              "home/applications/interchain-account"
             ]
           },
           {
             "group": "Guides",
             "pages": [
-              "guides/production",
+              {
+                "group": "Deploy Hyperlane",
+                "pages": [
+                  "guides/deploy/deploy-hyperlane",
+                  "guides/deploy/deploy-with-local-agents"
+                ]
+              },
+              {
+                "group": "Warp Routes",
+                "pages": ["guides/deploy/deploy-hyperlane"]
+              },
+              {
+                "group": "Go to Production",
+                "pages": ["guides/production"]
+              },
               "guides/create-custom-hook-and-ism",
               "guides/deploy-hyperlane-troubleshooting"
+            ]
+          },
+          {
+            "group": "Developer Tools",
+            "pages": [
+              "home/developer-tools/cli",
+              {
+                "group": "Libaries",
+                "pages": ["home/explorer/overview"]
+              },
+              {
+                "group": "Typescript SDK",
+                "pages": ["home/explorer/overview"]
+              },
+              {
+                "group": "Developer Tips",
+                "pages": ["home/explorer/overview"]
+              }
             ]
           },
           {
@@ -54,9 +86,9 @@
               {
                 "group": "Hyperlane Explorer",
                 "pages": [
-                  "guides/explorer",
-                  "guides/explorer/configuring-pi-chains",
-                  "guides/explorer/graphql-api"
+                  "home/explorer/overview",
+                  "home/explorer/configuring-pi-chains",
+                  "home/explorer/graphql-api"
                 ]
               }
             ]
@@ -72,7 +104,7 @@
         ]
       },
       {
-        "tab": "📖 Learn",
+        "tab": "Learn",
         "groups": [
           {
             "group": "Introduction",
@@ -110,7 +142,7 @@
         ]
       },
       {
-        "tab": "⚙️ Agent Operators",
+        "tab": "Agent Operators",
         "groups": [
           {
             "group": "Overview Agents",

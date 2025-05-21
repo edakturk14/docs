@@ -1,5 +1,5 @@
 ---
-title: "Interchain Account Interface"
+title: "Interchain Accounts"
 description: "Interchain Accounts (ICAs) enable a contract on the origin chain to make authenticated calls to contracts on a remote chain. Unlike general message passing, which requires the recipient to implement a specific interface, ICAs allow interaction with  contract on the destination chain."
 ---
 
@@ -13,14 +13,14 @@ Interchain Accounts allow you to make a remote call from **Chain A** to **Chain 
 
 Here's how it works:
 
-* You can encode your call which includes the to address, call data, and the `msg.value` for each call, batched together in an array.
-* You send the encoded call to the **Chain A** router which gets relayed to the **Chain B** router.
-* After decoding the calls, the **Chain B** router checks if the computed address is already deployed or not. If not, we deploy the *OwnableMulticall* contract.
-* The router then performs a multicall on the ICA address, which in turn makes the desired arbitrary call on **Chain B**.
+- You can encode your call which includes the to address, call data, and the `msg.value` for each call, batched together in an array.
+- You send the encoded call to the **Chain A** router which gets relayed to the **Chain B** router.
+- After decoding the calls, the **Chain B** router checks if the computed address is already deployed or not. If not, we deploy the _OwnableMulticall_ contract.
+- The router then performs a multicall on the ICA address, which in turn makes the desired arbitrary call on **Chain B**.
 
 The Interchain Account interface assigns every `(uint32 origin, address owner, address remoteRouter, address remoteISM)` tuple a unique ICA address. The sender owns that ICA on the destination chain, and can direct it to make arbitrary function calls via the `InterchainAccountRouter.callRemote()` endpoint.
 
-For core chains supported by Hyperlane, you are able to use the defaults that are set by the owner of the router contract. See the [#overrides](#overrides) section to see how to make calls to *any* chain.
+For core chains supported by Hyperlane, you are able to use the defaults that are set by the owner of the router contract. See the [#overrides](#overrides) section to see how to make calls to _any_ chain.
 
 ### Interface[​](#interface "Direct link to Interface")
 
@@ -29,7 +29,11 @@ For core chains supported by Hyperlane, you are able to use the defaults that ar
 ```
 
 <Check>
-  * Use `InterchainAccountRouter` out of the box - ICA routers have already been deployed to core chains. Please refer to [addresses](/docs/reference/contract-addresses#interchainaccountrouter). Try using the `callRemote` method to do a call via your wallet's interchain account.
+  * Use `InterchainAccountRouter` out of the box - ICA routers have already been
+  deployed to core chains. Please refer to
+  [addresses](/docs/reference/contract-addresses#interchainaccountrouter). Try
+  using the `callRemote` method to do a call via your wallet's interchain
+  account.
 </Check>
 
 ## Example Usage[​](#example-usage "Direct link to Example Usage")
@@ -40,9 +44,9 @@ When calling remote contracts using `callRemote`, the function parameters must b
 
 Each `Call` struct contains:
 
-* `to`: The target contract address (converted to bytes32).
-* `value`: The ETH or native token amount to send with the call.
-* `data`: The function call data, which can be encoded using abi.encodeCall.
+- `to`: The target contract address (converted to bytes32).
+- `value`: The ETH or native token amount to send with the call.
+- `data`: The function call data, which can be encoded using abi.encodeCall.
 
 `Call.data` can be easily encoded with the `abi.encodeCall` function.
 
@@ -78,9 +82,9 @@ Interchain Accounts allow developers to override the default chains and security
 
 These are useful for:
 
-* Calling an ICA on chains not configured in `InterchainAccountRouter`.
-* Using different ISM than the defaults configured in the `InterchainAccountRouter`
-* Adjusting the gas limit for IGP payments or setting other parameters.
+- Calling an ICA on chains not configured in `InterchainAccountRouter`.
+- Using different ISM than the defaults configured in the `InterchainAccountRouter`
+- Adjusting the gas limit for IGP payments or setting other parameters.
 
 ### Interface[​](#interface-1 "Direct link to Interface")
 

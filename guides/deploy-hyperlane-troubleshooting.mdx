@@ -8,8 +8,8 @@ title: "Hyperlane Troubleshooting Guide"
 
 Logging levels and formats can be configured for Hyperlane tooling using the following two environment variables:
 
-* `LOG_LEVEL`: The log level to filter to. Defaults to `info`. Choices: `debug | info | warn | error | off`
-* `LOG_FORMAT`: The format of the log output. Defaults to `pretty`. Choices: `pretty | json`
+- `LOG_LEVEL`: The log level to filter to. Defaults to `info`. Choices: `debug | info | warn | error | off`
+- `LOG_FORMAT`: The format of the log output. Defaults to `pretty`. Choices: `pretty | json`
 
 The [Hyperlane CLI](/docs/reference/cli) also allows configuring logging via the `--log` and `--verbosity` flags.
 
@@ -22,9 +22,10 @@ You can define a full configuration for any new chain in this file. The metadata
 Here's an example configuration for two local anvil chains:
 
 <Accordion title="Example: Two Local Anvil Chains">
-  ```
-  anvil1:  chainId: 31337  domainId: 31337  name: anvil1  protocol: ethereum  rpcUrls:    - http: http://localhost:8545  nativeToken:    name: Ether    symbol: ETH    decimals: 18anvil2:  chainId: 31338  domainId: 31338  name: anvil2  protocol: ethereum  rpcUrls:    - http: http://localhost:8555
-  ```
+  ``` anvil1: chainId: 31337 domainId: 31337 name: anvil1 protocol: ethereum
+  rpcUrls: - http: http://localhost:8545 nativeToken: name: Ether symbol: ETH
+  decimals: 18anvil2: chainId: 31338 domainId: 31338 name: anvil2 protocol:
+  ethereum rpcUrls: - http: http://localhost:8555 ```
 </Accordion>
 
 You can also extend a core chain config by providing the fields to be overridden:
@@ -38,21 +39,22 @@ sepolia:  blocks:    confirmations: 2
 You can override the RPC urls by extending the core chain config.
 
 <Accordion title="Example: Define RPC URLs array and adjust retry settings">
-  ```
-  demochain:  name: demochain  chainId: 123456  domainId: 123456  protocol: ethereum  rpcUrls:    - http: https://rpc-testnet.demochain.ggsepolia:  rpcUrls:    - http: https://rpc2.sepolia.org    - http: https://some-other-sepolia-rpc.gg      retry:        maxRequests: 10
-  ```
+  ``` demochain: name: demochain chainId: 123456 domainId: 123456 protocol:
+  ethereum rpcUrls: - http: https://rpc-testnet.demochain.ggsepolia: rpcUrls: -
+  http: https://rpc2.sepolia.org - http: https://some-other-sepolia-rpc.gg
+  retry: maxRequests: 10 ```
 </Accordion>
 
 #### Override transaction settings[​](#override-transaction-settings "Direct link to Override transaction settings")
 
 Transaction overrides are any properties to include when forming transaction requests. For example:
 
-* `gasPrice`: number | string
-* `maxFeePerGas`: number | string
-* `maxPriorityFeePerGas`: number | string
-* `nonce`: number | string
-* `type`: number
-* `ccipReadEnabled`: boolean
+- `gasPrice`: number | string
+- `maxFeePerGas`: number | string
+- `maxPriorityFeePerGas`: number | string
+- `nonce`: number | string
+- `type`: number
+- `ccipReadEnabled`: boolean
 
 In the example below we're using a gas price of 7 gwei, hardcoding the nonce, and setting a maximum value for the base and priority fees.
 
@@ -61,7 +63,8 @@ sepolia:  transactionOverrides:    gasPrice: 7000000000 # 7 gwei    maxFeePerGas
 ```
 
 <Warning>
-  If you are overriding the nonce in the chain configuration, ensure you are updating the value on successful transactions.
+  If you are overriding the nonce in the chain configuration, ensure you are
+  updating the value on successful transactions.
 </Warning>
 
 ### Message Delivery Issues[​](#message-delivery-issues "Direct link to Message Delivery Issues")
@@ -74,32 +77,32 @@ To identify the issue, check for logs indicating RPC-related problems such as: `
 
 To address these delays:
 
-* **Check RPC Health:** Ensure RPC endpoints are responsive.
-* **Configure Chains with On-Demand Blocks:** For these chains, set the reorgPeriod to 0. This ensures that agents always look at the tip of the chain, avoiding delays caused by block finalization processes.
+- **Check RPC Health:** Ensure RPC endpoints are responsive.
+- **Configure Chains with On-Demand Blocks:** For these chains, set the reorgPeriod to 0. This ensures that agents always look at the tip of the chain, avoiding delays caused by block finalization processes.
 
 ## Agent Troubleshooting[​](#agent-troubleshooting "Direct link to Agent Troubleshooting")
 
 ### Validator Troubleshooting[​](#validator-troubleshooting "Direct link to Validator Troubleshooting")
 
-* **`Validator has not announced any storage locations` Warning:**
+- **`Validator has not announced any storage locations` Warning:**
 
-  * **Reason**: This occurs when the relayer cannot retrieve validator signatures required to process a message.
+  - **Reason**: This occurs when the relayer cannot retrieve validator signatures required to process a message.
 
-  * **Solution**:
+  - **Solution**:
 
-    * Ensure the validators have announced their storage locations. Check validator logs for a message such as: `Validator has announced signature storage location, locations: ["file:///tmp/hyperlane-validator-signatures-local"]`
-    * Verify that each validator has a unique signature storage path (`--checkpointSyncer.path`) to prevent overwriting.
-    * Confirm that the relayer has read access to the storage paths.
+    - Ensure the validators have announced their storage locations. Check validator logs for a message such as: `Validator has announced signature storage location, locations: ["file:///tmp/hyperlane-validator-signatures-local"]`
+    - Verify that each validator has a unique signature storage path (`--checkpointSyncer.path`) to prevent overwriting.
+    - Confirm that the relayer has read access to the storage paths.
 
-* **`No ISM Found for Origin` Error**
+- **`No ISM Found for Origin` Error**
 
-  * **Reason**: This occurs when the Interchain Security Module (ISM) does not recognize the origin chain.
+  - **Reason**: This occurs when the Interchain Security Module (ISM) does not recognize the origin chain.
 
-  * **Solution**:
+  - **Solution**:
 
-    * Ensure the ISM configuration includes the Validators for the origin chain.
-    * If it doesn't, add validators for the origin chain to your ISM.
-    * Restart the relayer after updating the ISM configuration.
+    - Ensure the ISM configuration includes the Validators for the origin chain.
+    - If it doesn't, add validators for the origin chain to your ISM.
+    - Restart the relayer after updating the ISM configuration.
 
 ### Relayer Troubleshooting[​](#relayer-troubleshooting "Direct link to Relayer Troubleshooting")
 
