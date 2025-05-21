@@ -1,102 +1,158 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "logo": "/icon.png",
+  "name": "Hyperlane Docs",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#3578e5",
+    "light": "#6e9eff",
+    "dark": "#0e4baa"
   },
   "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "⏩ Home",
         "groups": [
           {
-            "group": "Get Started",
+            "group": "Introduction",
+            "pages": ["home/intro"]
+          },
+          {
+            "group": "Quickstart",
             "pages": [
-              "index",
-              "quickstart",
-              "development"
+              "guides/quickstart/deploy-warp-route",
+              "guides/quickstart/local-testnet-setup"
             ]
           },
           {
-            "group": "Essentials",
+            "group": "Applications",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
+              {
+                "group": "Warp Routes",
+                "pages": [
+                  "docs/protocol/warp-routes/warp-routes-overview",
+                  "docs/reference/applications/warp-routes",
+                  "docs/protocol/warp-routes/warp-routes-types",
+                  "docs/protocol/warp-routes/warp-routes-example-usage"
+                ]
+              },
+              "docs/reference/applications/interchain-account"
+            ]
+          },
+          {
+            "group": "Guides",
+            "pages": [
+              "guides/production",
+              "guides/create-custom-hook-and-ism",
+              "guides/deploy-hyperlane-troubleshooting"
+            ]
+          },
+          {
+            "group": "Resources",
+            "pages": [
+              {
+                "group": "Hyperlane Explorer",
+                "pages": [
+                  "guides/explorer",
+                  "guides/explorer/configuring-pi-chains",
+                  "guides/explorer/graphql-api"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Deployments",
+            "pages": [
+              "home/deployments/default-ism-validators",
+              "home/deployments/domains",
+              "home/deployments/registries"
             ]
           }
         ]
       },
       {
-        "tab": "API Reference",
+        "tab": "📖 Learn",
         "groups": [
           {
-            "group": "API Documentation",
+            "group": "Introduction",
+            "pages": ["learn/protocol/protocol-overview"]
+          },
+          {
+            "group": "HYPER and Protocol Economics",
+            "pages": ["learn/protocol-economics/intro"]
+          },
+          {
+            "group": "Protocol",
             "pages": [
-              "api-reference/introduction"
+              "learn/protocol/mailbox",
+              "learn/protocol/ISM/modular-security",
+              "learn/protocol/agents"
             ]
           },
           {
-            "group": "Endpoint Examples",
+            "group": "Alt-VM Implementations & Guides",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "learn/alt-vm-implementations/overview",
+              "learn/alt-vm-implementations/implementation-guide",
+              "learn/alt-vm-implementations/cosmos-sdk"
+            ]
+          },
+          {
+            "group": "Resources",
+            "pages": [
+              "learn/resources/message-debugging",
+              "learn/resources/glossary",
+              "learn/resources//faq",
+              "learn/resources/audits"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "⚙️ Agent Operators",
+        "groups": [
+          {
+            "group": "Overview Agents",
+            "pages": ["operate/overview-agents"]
+          },
+          {
+            "group": "Key Management",
+            "pages": ["operate/key-management/set-up-agent-keys"]
+          },
+          {
+            "group": "Validators",
+            "pages": [
+              "operate/validators/run-validators",
+              "operate/validators/validator-signatures-aws",
+              "operate/validators/monitoring-alerting"
+            ]
+          },
+          {
+            "group": "Relayer",
+            "pages": [
+              "operate/relayer/run-relayer",
+              "operate/relayer/message-filtering",
+              "operate/relayer/monitoring-alerting"
+            ]
+          },
+          {
+            "group": "Agent Config",
+            "pages": [
+              "operate/config/agent-config",
+              "operate/config/config-reference"
+            ]
+          },
+          {
+            "group": "Guides",
+            "pages": [
+              "operate/guides/docker-quickstart",
+              "operate/guides/deploy-with-terraform",
+              "operate/guides/avs-operator-guide"
             ]
           }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
-  },
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
-  },
-  "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
-      }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
-    }
-  },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
-    }
+    ]
   }
 }
