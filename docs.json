@@ -76,10 +76,6 @@
               {
                 "group": "Typescript SDK",
                 "pages": ["home/explorer/overview"]
-              },
-              {
-                "group": "Developer Tips",
-                "pages": ["home/explorer/overview"]
               }
             ]
           },
@@ -87,21 +83,25 @@
             "group": "Resources",
             "pages": [
               {
+                "group": "Deployments",
+                "pages": [
+                  "home/deployments/default-ism-validators",
+                  "home/deployments/domains",
+                  "home/deployments/registries"
+                ]
+              },
+              {
                 "group": "Hyperlane Explorer",
                 "pages": [
                   "home/explorer/overview",
                   "home/explorer/configuring-pi-chains",
                   "home/explorer/graphql-api"
                 ]
+              },
+              {
+                "group": "Developer Tips",
+                "pages": ["home/explorer/overview"]
               }
-            ]
-          },
-          {
-            "group": "Deployments",
-            "pages": [
-              "home/deployments/default-ism-validators",
-              "home/deployments/domains",
-              "home/deployments/registries"
             ]
           }
         ]
@@ -120,9 +120,15 @@
           {
             "group": "Protocol",
             "pages": [
-              "learn/protocol/mailbox",
-              "learn/protocol/ISM/modular-security",
-              "learn/protocol/agents"
+              {
+                "group": "Mailbox",
+                "pages": ["learn/protocol/general-message-passing/mailbox"]
+              },
+              {
+                "group": "Modular Security",
+                "pages": ["learn/protocol/ISM/modular-security"]
+              },
+              "learn/protocol/agents/overview"
             ]
           },
           {
