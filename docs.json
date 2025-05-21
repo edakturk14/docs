@@ -189,5 +189,49 @@
         ]
       }
     ]
+  },
+  "footer": {
+    "socials": {
+      "x": "https://x.com/hyperlane",
+      "github": "https://github.com/hyperlane-xyz",
+      "discord": "https://discord.com/invite/hyperlane"
+    },
+    "links": [
+      {
+        "header": "Developers",
+        "items": [
+          {
+            "label": "Bounties",
+            "href": "hhttps://github.com/search?q=org%3Ahyperlane-xyz+label%3Abounty+is%3Aopen+is%3Aissue&type=issues&s=&o=desc"
+          }
+        ]
+      },
+      {
+        "header": "Company",
+        "items": [
+          {
+            "label": "Careers",
+            "href": "https://jobs.lever.co/Hyperlane"
+          },
+          {
+            "label": "Blog",
+            "href": "https://hyperlane.xyz/blog"
+          }
+        ]
+      },
+      {
+        "header": "Legal",
+        "items": [
+          {
+            "label": "Privacy Policy",
+            "href": "https://hyperlane.xyz/privacy-policy"
+          },
+          {
+            "label": "Terms of Service",
+            "href": "https://hyperlane.xyz/terms-of-service"
+          }
+        ]
+      }
+    ]
   }
 }
