@@ -4,19 +4,22 @@ description: "Configure your signing key and S3 bucket"
 ---
 
 <Info>
-  These instructions are for a production environment where Validator keys exist in AWS's Key Management Service and Validator signatures are posted publicly in an S3 bucket.
-
-  If you're only intending to run a Validator for testing or development purposes, consider following the [local setup guide](/docs/guides/deploy-hyperlane-local-agents) instead.
+  These instructions are for a production environment where Validator keys exist
+  in AWS's Key Management Service and Validator signatures are posted publicly
+  in an S3 bucket. If you're only intending to run a Validator for testing or
+  development purposes, consider following the [local setup
+  guide](/docs/guides/deploy-hyperlane-local-agents) instead.
 </Info>
 
-### 1. Create an AWS IAM user, and a signing key[​](#1-create-an-aws-iam-user-and-a-signing-key "Direct link to 1. Create an AWS IAM user, and a signing key")
+### 1. Create an AWS IAM user, and a signing key
 
 Follow the instructions in [Agent Keys](/docs/operate/set-up-agent-keys) to generate an AWS IAM user and either a KMS or a hexadecimal key. You will use this key's credentials in the following steps.
 
-### 2. Create an S3 bucket[​](#2-create-an-s3-bucket "Direct link to 2. Create an S3 bucket")
+### 2. Create an S3 bucket
 
 <Info>
-  Note that Step 1 (creating the IAM user) is required for setting up the S3 bucket, so is required regardless of the type of key used.
+  Note that Step 1 (creating the IAM user) is required for setting up the S3
+  bucket, so is required regardless of the type of key used.
 </Info>
 
 Your Validator will post their signatures to this bucket.
@@ -40,7 +43,7 @@ Your Validator will post their signatures to this bucket.
 
 7. The remaining default settings are fine, click the orange "Create bucket" button on the bottom
 
-### 3. Configure S3 bucket permissions[​](#3-configure-s3-bucket-permissions "Direct link to 3. Configure S3 bucket permissions")
+### 3. Configure S3 bucket permissions
 
 Your Validator IAM user will need write permissions, and it should be publicly readable by the Relayer.
 
@@ -58,8 +61,10 @@ Your Validator IAM user will need write permissions, and it should be publicly r
 {  "Version": "2012-10-17",  "Statement": [    {      "Effect": "Allow",      "Principal": "*",      "Action": ["s3:GetObject", "s3:ListBucket"],      "Resource": ["${BUCKET_ARN}", "${BUCKET_ARN}/*"]    },    {      "Effect": "Allow",      "Principal": {        "AWS": "${USER_ARN}"      },      "Action": ["s3:DeleteObject", "s3:PutObject"],      "Resource": "${BUCKET_ARN}/*"    }  ]}
 ```
 
-<Check>
-  Advanced users may consider using the [S3 Terraform module](/docs/operate/deploy-with-terraform#iam--kms) instead to create the S3 bucket with the correct permissions.
-</Check>
+<Info>
+  Advanced users may consider using the [S3 Terraform
+  module](/docs/operate/deploy-with-terraform#iam--kms) instead to create the S3
+  bucket with the correct permissions.
+</Info>
 
 [Edit this page](https://github.com/hyperlane-xyz/v3-docs/tree/main/docs/operate/validators/validator-signatures-aws.mdx)

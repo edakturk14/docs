@@ -2,29 +2,38 @@
 title: "Run a Relayer"
 ---
 
-<Check>
-  * For an introduction on Relayers in Hyperlane, you can check out the [Overview section](/docs/operate/overview-agents).
-  * We recommend you read through the [**Deploy Hyperlane Local Agents**](/docs/guides/deploy-hyperlane-local-agents) guide to understand how to configure and run the Relayer locally, as well as the [**Run Validators**](/docs/operate/validators/run-validators) documentation before trying to run a production Relayer.
-</Check>
+<Info>
+  * For an introduction on Relayers in Hyperlane, you can check out the
+  [Overview section](/docs/operate/overview-agents). * We recommend you read
+  through the [**Deploy Hyperlane Local
+  Agents**](/docs/guides/deploy-hyperlane-local-agents) guide to understand how
+  to configure and run the Relayer locally, as well as the [**Run
+  Validators**](/docs/operate/validators/run-validators) documentation before
+  trying to run a production Relayer.
+</Info>
 
 ## Requirements[​](#requirements "Direct link to Requirements")
 
-* **RPC nodes**
-  * A Relayer uses RPC nodes to read the origin chain(s), and deliver messages to the destination chain(s). The Relayer must be configured with an RPC node for all origin and destination chains.
+- **RPC nodes**
 
-* **One or more signing keys**
+  - A Relayer uses RPC nodes to read the origin chain(s), and deliver messages to the destination chain(s). The Relayer must be configured with an RPC node for all origin and destination chains.
 
-  * In order to deliver messages, the Relayer must be configured with a signing key to submit transactions on each destination chain (thus need funds on those chains).
-  * The Relayer uses this key to sign `Mailbox.process()` transactions. The Hyperlane Relayer agent currently supports configuration with AWS KMS keys that are accessed via API keys/secrets or raw hexadecimal private keys.
+- **One or more signing keys**
 
-* **A machine to run on**
-  * Relayer operators can compile the Rust binary themselves, or run a Docker image provided by Abacus Works. The binary can be run using your favorite cloud service.
+  - In order to deliver messages, the Relayer must be configured with a signing key to submit transactions on each destination chain (thus need funds on those chains).
+  - The Relayer uses this key to sign `Mailbox.process()` transactions. The Hyperlane Relayer agent currently supports configuration with AWS KMS keys that are accessed via API keys/secrets or raw hexadecimal private keys.
+
+- **A machine to run on**
+  - Relayer operators can compile the Rust binary themselves, or run a Docker image provided by Abacus Works. The binary can be run using your favorite cloud service.
 
 ## Guide[​](#guide "Direct link to Guide")
 
 <Info>
-  * The local agent setup shows how you can run a Relayer on your *local machine*, which is **only for testing and development purposes**.
-  * We strongly encourage you to follow the [local agents guide](/docs/guides/deploy-hyperlane-local-agents) to understand how to configure and run the Relayer locally.
+  * The local agent setup shows how you can run a Relayer on your *local
+  machine*, which is **only for testing and development purposes**. * We
+  strongly encourage you to follow the [local agents
+  guide](/docs/guides/deploy-hyperlane-local-agents) to understand how to
+  configure and run the Relayer locally.
 </Info>
 
 ### Keys[​](#keys "Direct link to Keys")
@@ -40,7 +49,8 @@ A hexadecimal private key used for in-memory signing can be used by your Relayer
 An AWS KMS key can be used by your Relayer to sign transactions. This is the recommended setup for a production Relayer.
 
 <Check>
-  See the [Agent Keys](/docs/operate/set-up-agent-keys) page to set up your Hexadecimal or AWS KMS keys.
+  See the [Agent Keys](/docs/operate/set-up-agent-keys) page to set up your
+  Hexadecimal or AWS KMS keys.
 </Check>
 
 ### Configuration[​](#configuration "Direct link to Configuration")
@@ -49,31 +59,32 @@ An AWS KMS key can be used by your Relayer to sign transactions. This is the rec
 
 Hyperlane Validators and Relayers can use **multiple RPC URLs** to improve reliability and redundancy. The setup varies based on the chain type.
 
-* EVM Chains
-* Cosmos Chains
-* SVM Chains
+- EVM Chains
+- Cosmos Chains
+- SVM Chains
 
 EVM-based chains support configuring multiple RPC endpoints for redundancy and can specify how they are used.
 
-* **Configure multiple RPCs:** Use [`customRpcUrls`](/docs/operate/config-reference#chainschain_namecustomrpcurls).
+- **Configure multiple RPCs:** Use [`customRpcUrls`](/docs/operate/config-reference#chainschain_namecustomrpcurls).
 
-* **RPC Selection Mode ([`rpcConsensusType`](/docs/operate/config-reference#chainschain_namerpcconsensustype))**:
+- **RPC Selection Mode ([`rpcConsensusType`](/docs/operate/config-reference#chainschain_namerpcconsensustype))**:
 
-  * **Fallback**: The agent tries the first URL and switches to the next if needed.
-  * **Quorum**: Requires a majority of the URLs to agree with the exception of submitting transactions.
+  - **Fallback**: The agent tries the first URL and switches to the next if needed.
+  - **Quorum**: Requires a majority of the URLs to agree with the exception of submitting transactions.
 
 Cosmos-based chains require both **RPC and gRPC endpoints** for proper operation.
 
-* **Configure multiple RPCs:** Use [`customRpcUrls`](/docs/operate/config-reference#chainschain_namecustomrpcurls).
-* **Configure gRPC endpoints:** Use \[`customGrpcUrls`].
-* **Fallback Mechanism:** Cosmos agents always use **fallback mode**.
+- **Configure multiple RPCs:** Use [`customRpcUrls`](/docs/operate/config-reference#chainschain_namecustomrpcurls).
+- **Configure gRPC endpoints:** Use \[`customGrpcUrls`].
+- **Fallback Mechanism:** Cosmos agents always use **fallback mode**.
 
 SVM-based chains support configuring multiple RPC endpoints, but **only a single RPC is used**.
 
-* **Configure RPCs:** Use [`customRpcUrls`](/docs/operate/config-reference#chainschain_namecustomrpcurls).
+- **Configure RPCs:** Use [`customRpcUrls`](/docs/operate/config-reference#chainschain_namecustomrpcurls).
 
 <Warning>
-  For **SVM chains**, only a **single RPC URL** is used. There is no fallback or quorum-based selection mechanism.
+  For **SVM chains**, only a **single RPC URL** is used. There is no fallback or
+  quorum-based selection mechanism.
 </Warning>
 
 #### Configuration Settings[​](#configuration-settings "Direct link to Configuration Settings")
@@ -87,7 +98,11 @@ Like the local setup, there are a few base arguments you should provide when con
 | `--allowLocalCheckpointSyncers` | If `true`, this will allow the Relayer to look for Validator signatures on the Relayer's local filesystem. In a production environment, this should be `false`. If you're running a Validator on the same machine by following the Validator local setup instructions, set this to `true` so that your Relayer can access the local Validator signatures. |
 
 <Info>
-  Your Relayer takes both command line arguments and environment variables as configuration. Take a look at the [agent configuration](/docs/operate/agent-config) page and the [configuration reference](/docs/operate/config-reference) for a full list of configuration possibilities.
+  Your Relayer takes both command line arguments and environment variables as
+  configuration. Take a look at the [agent
+  configuration](/docs/operate/agent-config) page and the [configuration
+  reference](/docs/operate/config-reference) for a full list of configuration
+  possibilities.
 </Info>
 
 You can also provide the path to additional configuration files as a comma separated list with the [`CONFIG_FILES` environment variable](/docs/operate/config-reference#config_files). If you choose to run in Docker, see the docker section of [agent configuration](/docs/operate/agent-config) for tips on mounting your config files into your Docker container.
@@ -96,8 +111,8 @@ You can also provide the path to additional configuration files as a comma separ
 
 These configurations requirements differ depending on which key setup instructions you followed.
 
-* Hexadecimal Key
-* AWS KMS Key
+- Hexadecimal Key
+- AWS KMS Key
 
 If you created a [hexadecimal key](/docs/operate/set-up-agent-keys), configure the default signer like so:
 
@@ -121,8 +136,8 @@ For chain-specific signers (i.e. to customize the key to use for each chain) tak
 
 The recommended installation method for a production environment is using a Docker image.
 
-* Docker image
-* Building from source
+- Docker image
+- Building from source
 
 First download the docker image:
 
@@ -161,8 +176,8 @@ If the Relayer's keys have been configured with AWS KMS, you will have to provid
 
 For a refresher, check out the [Agent Keys](/docs/operate/set-up-agent-keys) guide.
 
-* Using Docker
-* Building from source
+- Using Docker
+- Building from source
 
 Then start the container with the relevant arguments. For example, your configuration for AWS:
 
@@ -173,11 +188,12 @@ docker run \  -it \  -e AWS_ACCESS_KEY_ID=ABCDEFGHIJKLMNOP \  -e AWS_SECRET_ACCE
 <Info>
   If you're running Validators with a local setup on the same machine and running a local Relayer to access these Validator signatures, be sure to [mount](https://docs.docker.com/storage/bind-mounts/) your local Validator's signature directory into your Relayer at the same path that you used when [announcing your Validator](/docs/operate/validators/run-validators#Announcing-your-validator)
 
-  For example, if your local Validator is writing signatures to `/tmp/hyperlane-validator-signatures-ethereum`, you should mount a directory for the Docker container:
+For example, if your local Validator is writing signatures to `/tmp/hyperlane-validator-signatures-ethereum`, you should mount a directory for the Docker container:
 
-  ```
-  docker run \  -it \  -e CONFIG_FILES=/config/agent-config.json \  --mount type=bind,source=$CONFIG_FILES,target=/config/agent-config.json,readonly \  --mount type=bind,source="$(pwd)"/hyperlane-validator-signatures-ethereum,target=/tmp/hyperlane-validator-signatures-ethereum,readonly \  --mount type=bind,source="$(pwd)"/hyperlane_db,target=/hyperlane_db \  gcr.io/abacus-labs-dev/hyperlane-agent:agents-v1.4.0 \  ./relayer \  --db /hyperlane_db \  --relayChains ethereum,polygon,avalanche \  --allowLocalCheckpointSyncers true \  --defaultSigner.key <your_relayer_key> \
-  ```
+```
+docker run \  -it \  -e CONFIG_FILES=/config/agent-config.json \  --mount type=bind,source=$CONFIG_FILES,target=/config/agent-config.json,readonly \  --mount type=bind,source="$(pwd)"/hyperlane-validator-signatures-ethereum,target=/tmp/hyperlane-validator-signatures-ethereum,readonly \  --mount type=bind,source="$(pwd)"/hyperlane_db,target=/hyperlane_db \  gcr.io/abacus-labs-dev/hyperlane-agent:agents-v1.4.0 \  ./relayer \  --db /hyperlane_db \  --relayChains ethereum,polygon,avalanche \  --allowLocalCheckpointSyncers true \  --defaultSigner.key <your_relayer_key> \
+```
+
 </Info>
 
 See these instructions for building from source without Docker.
