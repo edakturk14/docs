@@ -19,7 +19,22 @@
         "groups": [
           {
             "group": "Overview",
-            "pages": ["index", "home/intro"]
+            "pages": [
+              "index",
+              "home/intro",
+              {
+                "group": "Deployments",
+                "pages": [
+                  {
+                    "group": "Contract Addresses",
+                    "pages": ["home/deployments/domains"]
+                  },
+                  "home/deployments/default-ism-validators",
+                  "home/deployments/domains",
+                  "home/deployments/registries"
+                ]
+              }
+            ]
           },
           {
             "group": "Quickstart",
@@ -55,7 +70,27 @@
               },
               {
                 "group": "Warp Routes",
-                "pages": ["guides/deploy/deploy-hyperlane"]
+                "pages": [
+                  {
+                    "group": "EVM Warp Routes",
+                    "pages": [
+                      "guides/warp-routes/evm/deploy-yield-routes",
+                      "guides/warp-routes/evm/fast-native-transfer-via-gas-token",
+                      "guides/warp-routes/evm/extending-warp-routes",
+                      "guides/warp-routes/evm/xerc20-warp-route",
+                      "guides/warp-routes/evm/managing-warp-route-limits",
+                      "guides/warp-routes/evm/deploy-multi-collateral-warp-routes",
+                      "guides/warp-routes/evm/multi-collateral-warp-routes-rebalancing",
+                      "guides/warp-routes/evm/transfer-and-call-pattern"
+                    ]
+                  },
+                  {
+                    "group": "SVM Warp Routes",
+                    "pages": ["guides/warp-routes/svm/svm-warp-route-guide"]
+                  },
+                  "guides/warp-routes/evm-svm-warp-route-guide",
+                  "guides/warp-routes/bridge-ui-guide"
+                ]
               },
               {
                 "group": "Go to Production",
@@ -82,14 +117,6 @@
           {
             "group": "Resources",
             "pages": [
-              {
-                "group": "Deployments",
-                "pages": [
-                  "home/deployments/default-ism-validators",
-                  "home/deployments/domains",
-                  "home/deployments/registries"
-                ]
-              },
               {
                 "group": "Hyperlane Explorer",
                 "pages": [
