@@ -4,7 +4,6 @@ title: "Bridge a Token"
 
 <Info>
   **This guide is for EVM-based chains.** For other environments, check out:
-
 - [SVM Warp Route Guide](/docs/guides/deploy-svm-warp-route)
 - [EVM ↔ SVM Warp Route Guide](/docs/guides/deploy-evm-svm-warp-route)
 
@@ -35,13 +34,13 @@ hyperlane warp init
 
 This command provides a walkthrough, prompting you for configuration choices directly in the terminal. You will be asked to select specific options for each part of the configuration, such as the network type, chains to connect, token type, and whether to use trusted ISMs.
 
-<Check>
+<Info>
   * If your config looks correct, you can now skip to [Step 2:
   Deployment](#2-deployment). Or see below for details on how to define your
   config manually. * If you need any help setting up a token bridge, reach out
   on #developers on Discord or [get in
   touch](https://forms.gle/KyRTaWvo4XNmNvrq6).
-</Check>
+</Info>
 
 #### Deployment config schema[​](#deployment-config-schema "Direct link to Deployment config schema")
 
@@ -74,13 +73,13 @@ You may specify the following optional values in your config entries. If no valu
 
 For a minimal Warp deployment config example using local anvil chains, see [`warp-route-deployment.yaml`](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/main/typescript/cli/examples/warp-route-deployment.yaml).
 
-<Check>
+<Info>
   * Learn more about Warp Route types and the different configurations in the following sections:
 
     * [Warp Route Types](/docs/protocol/warp-routes/warp-routes-types)
     * [Warp Route Example Usage](/docs/protocol/warp-routes/warp-routes-example-usage)
 
-</Check>
+</Info>
 
 ### Chain Configurations
 
@@ -148,14 +147,14 @@ hyperlane relayer --symbol TOKEN
 
 You can test in either direction between where you have the warp route set. However, if you deployed `native` or `collateral` warp route, you must select the origin where the route corresponding to where that `native` or `collateral` type is deployed. By default, the amount sent is `1` of the smallest unit of the token.
 
-<Check>
+<Info>
   **Next Steps**
 
 - If you were following the [Deploy Hyperlane to a new chain](/docs/deploy-hyperlane#3-warp-route) guide and want to connect other chains or move to production with Abacus Works, continue with the [Submit to Registry](/docs/deploy-hyperlane#4-submit-to-registry) guide.
 
 - For interacting with Warp Routes via a UI, continue to the [Warp UI docs](/docs/guides/deploy-warp-route-UI).
 
-</Check>
+</Info>
 
 ## Learn More
 

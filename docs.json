@@ -18,8 +18,8 @@
         "tab": "Home",
         "groups": [
           {
-            "group": "Introduction",
-            "pages": ["home/intro"]
+            "group": "Overview",
+            "pages": ["index", "home/intro"]
           },
           {
             "group": "Quickstart",
@@ -34,10 +34,10 @@
               {
                 "group": "Warp Routes",
                 "pages": [
-                  "docs/protocol/warp-routes/warp-routes-overview",
-                  "docs/reference/applications/warp-routes",
-                  "docs/protocol/warp-routes/warp-routes-types",
-                  "docs/protocol/warp-routes/warp-routes-example-usage"
+                  "home/applications/warp-routes/overview",
+                  "home/applications/warp-routes/interface",
+                  "home/applications/warp-routes/types",
+                  "home/applications/warp-routes/example-usage"
                 ]
               },
               "home/applications/interchain-account"
@@ -47,10 +47,10 @@
             "group": "Guides",
             "pages": [
               {
-                "group": "Deploy Hyperlane",
+                "group": "Setup Hyperlane on your Chain",
                 "pages": [
-                  "guides/deploy/deploy-hyperlane",
-                  "guides/deploy/deploy-with-local-agents"
+                  "guides/chains/deploy-hyperlane",
+                  "guides/chains/deploy-hyperlane-with-local-agents"
                 ]
               },
               {
