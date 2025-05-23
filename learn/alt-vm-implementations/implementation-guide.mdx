@@ -1,7 +1,8 @@
 ---
 title: "Implementation Guide"
-description: "A Hyperlane implementation for a new chain architecture is comprised of the following"
 ---
+
+A Hyperlane implementation for a new chain architecture is comprised of the following:
 
 1. [Contracts](#1-contracts): expose the interface for application developers to send and receive messages with
 2. [Agents](#2-agents): operate the protocol by adding security and relaying messages
@@ -21,7 +22,7 @@ Before getting started here, it is recommended to review the protocol documentat
 
 </Info>
 
-## 1. Contracts[​](#1-contracts "Direct link to 1. Contracts")
+## 1. Contracts
 
 Below describes the onchain contract spec for the Hyperlane protocol. It uses solidity types for familiarity but everything should be generalizable to other languages.
 
@@ -30,7 +31,7 @@ Below describes the onchain contract spec for the Hyperlane protocol. It uses so
 - Ensure events are properly emitted for all important state changes.
 - Clearly document any deviations from the reference implementation and their rationale.
 
-### Some things to consider[​](#some-things-to-consider "Direct link to Some things to consider")
+### Considerations
 
 **Byte representation:**
 
@@ -42,7 +43,7 @@ Below describes the onchain contract spec for the Hyperlane protocol. It uses so
 - Pay close attention to how message fields are serialized, especially for variable-length data like the message body.
 - Ensure that the serialization method used (e.g., abi.encodePacked equivalent) behaves consistently across different chain implementations.
 
-### Message[​](#message "Direct link to Message")
+### Message
 
 The message is the core data structure used by the Hyperlane protocol. It is a packed data structure that contains all the information needed to route a message from one domain to another.
 
@@ -56,7 +57,7 @@ The message is the core data structure used by the Hyperlane protocol. It is a p
 struct Message {    // The version of the origin and destination Mailboxes    uint8 version,    // A nonce to uniquely identify the message on its origin Mailbox    uint32 nonce,    // Domain of origin chain    uint32 origin,    // Address of sender on origin chain    bytes32 sender,    // Domain of destination chain    uint32 destination,    // Address of recipient on destination chain    bytes32 recipient,    // Raw bytes of message body    bytes body}
 ```
 
-### Mailbox[​](#mailbox "Direct link to Mailbox")
+### Mailbox
 
 The mailbox is the entrypoint for developers to send and receive messages from. Make sure that `localDomain` is immutable to prevent unauthorized changes that could compromise cross-chain security.
 
@@ -76,7 +77,7 @@ Implementations:
   sure to call the required hook before the default or custom hook.
 </Info>
 
-#### dispatch[​](#dispatch "Direct link to dispatch")
+#### dispatch
 
 Dispatches a message to the destination domain and recipient.
 
@@ -96,7 +97,7 @@ Dispatches a message to the destination domain and recipient, and provides metad
 function dispatch(    // Domain of destination chain    uint32 destination,    // Address of recipient on destination chain as bytes32    bytes32 recipient,    // Raw bytes content of message body    bytes body,    // Metadata used by the custom post dispatch hook    bytes customHookMetadata,    // Custom hook to use instead of the default    IPostDispatchHook customHook) returns (    // The message ID inserted into the Mailbox's merkle tree    bytes32 messageId);
 ```
 
-#### process[​](#process "Direct link to process")
+#### process
 
 Attempts to deliver `message` to its recipient. Verifies `message` via the recipient's ISM using the provided `metadata`.
 
@@ -104,7 +105,7 @@ Attempts to deliver `message` to its recipient. Verifies `message` via the recip
 function process(    // Metadata used by the ISM to verify message.    bytes metadata,    // Byte packed message    bytes message);
 ```
 
-#### latestDispatchedId[​](#latestdispatchedid "Direct link to latestDispatchedId")
+#### latestDispatchedId
 
 Returns the latest dispatched message ID used for auth in post-dispatch hooks.
 
@@ -112,7 +113,7 @@ Returns the latest dispatched message ID used for auth in post-dispatch hooks.
 function latestDispatchedId() public view returns (bytes32);
 ```
 
-### Message Recipient[​](#message-recipient "Direct link to Message Recipient")
+### Message Recipient
 
 A contract that wants to receive a message must expose the following handler.
 
@@ -140,7 +141,7 @@ function interchainSecurityModule() returns (address);
   here.](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/59e89afc5cbdec5362da5e13327eab4cb640b6b5/solidity/test/Messaging.t.sol#L29)
 </Info>
 
-### Interchain Security Module[​](#interchain-security-module "Direct link to Interchain Security Module")
+### Interchain Security Module
 
 Interchain security modules are used to verify messages before they are processed.
 
@@ -150,7 +151,7 @@ Interchain security modules are used to verify messages before they are processe
 - [Sealevel](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/main/rust/main/hyperlane-core/src/traits/interchain_security_module.rs)
 - [Cairo](https://github.com/astraly-labs/hyperlane_starknet/blob/c0dbded927f340715bef8f6a8c6262f520ff3f1a/cairo/crates/contracts/src/interfaces.cairo#L93)
 
-#### moduleType[​](#moduletype "Direct link to moduleType")
+#### moduleType
 
 Returns an enum that represents the type of security model encoded by this ISM.
 
@@ -160,7 +161,7 @@ enum ModuleType {    UNUSED,    ROUTING,    AGGREGATION,    LEGACY_MULTISIG,    
 
 _Relayers infer how to fetch and format metadata from this type._
 
-#### verify[​](#verify "Direct link to verify")
+#### verify
 
 Defines a security model responsible for verifying interchain messages based on the provided metadata.
 
@@ -174,7 +175,7 @@ function verify(    // Off-chain metadata provided by a relayer, specific    // 
   other chains. You may need to implement dynamic modules for the ISM instead.
 </Info>
 
-### Validator Announce[​](#validator-announce "Direct link to Validator Announce")
+### Validator Announce
 
 Validators announce their signature storage location so that the relayer can fetch and verify their signatures.
 
@@ -184,7 +185,7 @@ Validators announce their signature storage location so that the relayer can fet
 - [Sealevel](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/main/rust/sealevel/programs/validator-announce/src/instruction.rs)
 - [Cairo](https://github.com/astraly-labs/hyperlane_starknet/blob/main/cairo/crates/contracts/src/isms/multisig/validator_announce.cairo)
 
-### announce[​](#announce "Direct link to announce")
+### announce
 
 Announces a validator signature storage location
 
@@ -192,7 +193,7 @@ Announces a validator signature storage location
 function announce(    address validator,      // The address of the validator    string storageLocation, // Information encoding the location of signed checkpoints    bytes signature         // The signed validator announcement) external returns (bool);
 ```
 
-### getAnnouncedStorageLocations[​](#getannouncedstoragelocations "Direct link to getAnnouncedStorageLocations")
+### getAnnouncedStorageLocations
 
 Returns a list of all announced storage locations
 
@@ -200,7 +201,7 @@ Returns a list of all announced storage locations
 function getAnnouncedStorageLocations(    address[] _validators   // The list of validators to get storage locations for) external view returns (    string[][]              // A list of registered storage metadata);
 ```
 
-### Multisig ISM[​](#multisig-ism "Direct link to Multisig ISM")
+### Multisig ISM
 
 Implements a security module that checks if the metadata provided to verify satisfies a quorum of signatures from a set of configured validators.
 
@@ -218,7 +219,7 @@ Implements a security module that checks if the metadata provided to verify sati
   example](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/main/solidity/test/isms/MultisigIsm.t.sol#L194).
 </Warning>
 
-#### Metadata[​](#metadata "Direct link to Metadata")
+#### Metadata
 
 To be used with the `MESSAGE_ID_MULTISIG` module type implementation in the relayer.
 
@@ -252,7 +253,7 @@ function validatorsAndThreshold(    // Hyperlane formatted interchain message   
   here.](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/59e89afc5cbdec5362da5e13327eab4cb640b6b5/solidity/test/Mailbox.t.sol#L282)
 </Info>
 
-### Interchain Gas Paymaster[​](#interchain-gas-paymaster "Direct link to Interchain Gas Paymaster")
+### Interchain Gas Paymaster
 
 The gas paymaster is used to pay for the gas required in message processing on the destination chain. This is not strictly required if the relayer is willing to subsidize message processing.
 
@@ -268,7 +269,7 @@ The gas paymaster is used to pay for the gas required in message processing on t
 - [CosmWasm](https://github.com/many-things/cw-hyperlane/blob/main/contracts/igps/core/src)
 - [Sealevel](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/main/rust/sealevel/programs/hyperlane-sealevel-igp/src/processor.rs)
 
-#### payForGas[​](#payforgas "Direct link to payForGas")
+#### payForGas
 
 Deposits msg.value as a payment for the relaying of a message to its destination chain.
 
@@ -281,7 +282,7 @@ Deposits msg.value as a payment for the relaying of a message to its destination
 function payForGas(    // The ID of the message to pay for.    bytes32 messageId,    // The domain of the message's destination chain.    uint32 destination,    // The amount of destination gas to pay for.    uint256 gasAmount,    // The local address to refund any overpayment to.    address refundAddress) payable;
 ```
 
-#### GasPayment[​](#gaspayment "Direct link to GasPayment")
+#### GasPayment
 
 Emitted when a payment is made for a message's gas costs.
 
@@ -289,7 +290,7 @@ Emitted when a payment is made for a message's gas costs.
 event GasPayment(    bytes32 messageId,    uint32 destinationDomain,    uint256 gasAmount,    uint256 payment);
 ```
 
-#### DestinationGasConfigSet[​](#destinationgasconfigset "Direct link to DestinationGasConfigSet")
+#### DestinationGasConfigSet
 
 Emitted when the gas oracle for a remote domain is set.
 
@@ -297,21 +298,21 @@ Emitted when the gas oracle for a remote domain is set.
 event DestinationGasConfigSet(    uint32 remoteDomain, // remote domain    address gasOracle,   // gas oracle    uint96 gasOverhead   // destination gas overhead);
 ```
 
-## 2. Agents[​](#2-agents "Direct link to 2. Agents")
+## 2. Agents
 
 Below describes the agent spec for a new chain implementation. The rust implementations hope to support all chains, but the spec is intended to be chain agnostic.
 
-#### Message Indexing[​](#message-indexing "Direct link to Message Indexing")
+#### Message Indexing
 
 All agents must index messages from the origin mailbox. In the solidity mailbox, we [emit an event for each message](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/59e89afc5cbdec5362da5e13327eab4cb640b6b5/solidity/contracts/Mailbox.sol#L221-L222) dispatched. Other chains may have different ways of surfacing this information, but the agent must be able to get message content reliably and with consistent ordering -- see the [message indexer](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/main/rust/main/hyperlane-core/src/traits/indexer.rs) trait.
 
 - [ethereum](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/main/rust/main/chains/hyperlane-ethereum/src/contracts/mailbox.rs)
 
-### Validator[​](#validator "Direct link to Validator")
+### Validator
 
 In addition to indexing messages dispatched from the mailbox, validators produce attestations for the messages they observe to be used on the destination chain for security.
 
-#### Checkpoint[​](#checkpoint "Direct link to Checkpoint")
+#### Checkpoint
 
 Validators produce attestations called checkpoints from the Mailbox which commit via merkle root to all dispatched message IDs.
 
@@ -321,7 +322,7 @@ pub struct Checkpoint {    /// The mailbox address    pub mailbox_address: H256,
 
 Validators use the latest checkpoint method on the [mailbox trait](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/main/rust/main/hyperlane-core/src/traits/mailbox.rs) to get the latest checkpoint from the mailbox and submit signatures to some highly available storage using the [checkpoint syncer trait](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/main/rust/main/hyperlane-base/src/traits/checkpoint_syncer.rs).
 
-#### Checkpoint with Message ID[​](#checkpoint-with-message-id "Direct link to Checkpoint with Message ID")
+#### Checkpoint with Message ID
 
 Validators use indexed messages to join the checkpoint with the corresponding message ID emitted from the mailbox.
 
@@ -336,15 +337,15 @@ They also publish these augmented checkpoints on their syncer.
   contracts and observe that it creates valid signatures.
 </Check>
 
-### Relayer[​](#relayer "Direct link to Relayer")
+### Relayer
 
 In addition to indexing messages dispatched from the mailbox, a relayer processes messages on the destination chain. This requires building metadata that satisfies the message recipient's ISM verification requirements, and signing transactions that process the message on the destination mailbox.
 
-#### Metadata Builders[​](#metadata-builders "Direct link to Metadata Builders")
+#### Metadata Builders
 
 Each module type implies a different metadata format for message verification to succeed. A Relayer will need each module trait (eg [multisig](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/main/rust/main/hyperlane-core/src/traits/multisig_ism.rs)) to be implemented.
 
-#### Message Processor[​](#message-processor "Direct link to Message Processor")
+#### Message Processor
 
 The relayer will attempt to process messages on the destination mailbox (see [message processor](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/fa424826c0132c135511e5316a6e559b574b3a8f/rust/main/agents/relayer/src/msg/processor.rs#L28)). If
 
@@ -354,11 +355,11 @@ The relayer will attempt to process messages on the destination mailbox (see [me
 
 then the message will be kicked to an exponential backoff retry queue. The relayer relies on implementations of the [mailbox](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/main/rust/main/hyperlane-core/src/traits/mailbox.rs) and [ism](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/main/rust/main/hyperlane-core/src/traits/interchain_security_module.rs) traits for these checks.
 
-#### Gas Payment Enforcement[​](#gas-payment-enforcement "Direct link to Gas Payment Enforcement")
+#### Gas Payment Enforcement
 
 The Relayer may also require gas payment for a specific message ID on the origin chain before processing the message on the destination chain. To do this, they must have an IGP deployed with their address set as beneficiary and index gas payment events. See [gas payment enforcement trait](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/main/rust/main/agents/relayer/src/msg/gas_payment/mod.rs). We recommend to start with no gas payment enforcement policy and then gradually support more restrictive ones.
 
-### Testing[​](#testing "Direct link to Testing")
+### Testing
 
 Once you have implemented an MVP of the relayer, you should create an end-to-end test that:
 
@@ -375,9 +376,9 @@ See this [end-to-end test on the Rust codebase ](https://github.com/hyperlane-xy
   that you also run end-to-end tests with real testnets.
 </Check>
 
-## 3. Applications[​](#3-applications "Direct link to 3. Applications")
+## 3. Applications
 
-### Warp Routes[​](#warp-routes "Direct link to Warp Routes")
+### Warp Routes
 
 Token router application that routes tokens between domains on demand.
 
@@ -385,7 +386,7 @@ Token router application that routes tokens between domains on demand.
 - [CosmWasm](https://github.com/many-things/cw-hyperlane/tree/main/packages/interface/src/warp)
 - [Sealevel](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/main/rust/sealevel/libraries/hyperlane-sealevel-token/src/instruction.rs)
 
-#### transferRemote[​](#transferremote "Direct link to transferRemote")
+#### transferRemote
 
 Transfers `amountOrId` token to `recipient` on `destination` domain.
 
@@ -393,12 +394,10 @@ Transfers `amountOrId` token to `recipient` on `destination` domain.
 function transferRemote(    // The Domain of the destination chain.    uint32  destination,    // The address of the recipient on the destination chain.    bytes32 recipient,    // The amount or identifier of tokens to be sent to the remote recipient.    uint256 amountOrId) returns (    // The identifier of the dispatched message.    bytes32 messageId);
 ```
 
-#### Transfer Message[​](#transfer-message "Direct link to Transfer Message")
+#### Transfer Message
 
 To be interoperable with Warp Routes on other chains, the `body` of a transfer message must be a byte packed `TransferMessage` struct.
 
 ```
 struct TransferMessage {    // The recipient of the remote transfer    bytes32 recipient;    // An amount of tokens or a token identifier to be transferred    uint256 amountOrId;    // Optional metadata e.g. NFT URI information    bytes   metadata;}
 ```
-
-[Edit this page](https://github.com/hyperlane-xyz/v3-docs/tree/main/docs/guides/implementation-guide.mdx)
