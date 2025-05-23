@@ -12,7 +12,7 @@ title: "Run a Relayer"
   trying to run a production Relayer.
 </Info>
 
-## Requirements[​](#requirements "Direct link to Requirements")
+## Requirements
 
 - **RPC nodes**
 
@@ -26,7 +26,7 @@ title: "Run a Relayer"
 - **A machine to run on**
   - Relayer operators can compile the Rust binary themselves, or run a Docker image provided by Abacus Works. The binary can be run using your favorite cloud service.
 
-## Guide[​](#guide "Direct link to Guide")
+## Guide
 
 <Info>
   * The local agent setup shows how you can run a Relayer on your *local
@@ -36,15 +36,15 @@ title: "Run a Relayer"
   configure and run the Relayer locally.
 </Info>
 
-### Keys[​](#keys "Direct link to Keys")
+### Keys
 
 The Relayer needs to be able to submit transactions to many destination chains, and therefore requires access to a key for signing transactions. There are two supported key types: hexadecimal private keys (for in-memory signing), and AWS KMS based keys (best practice for production environments).
 
-#### Hexadecimal keys[​](#hexadecimal-keys "Direct link to Hexadecimal keys")
+#### Hexadecimal keys
 
 A hexadecimal private key used for in-memory signing can be used by your Relayer to sign transactions. This is the recommended setup for testing or development purposes, but may also be used in production.
 
-#### AWS KMS keys[​](#aws-kms-keys "Direct link to AWS KMS keys")
+#### AWS KMS keys
 
 An AWS KMS key can be used by your Relayer to sign transactions. This is the recommended setup for a production Relayer.
 
@@ -53,9 +53,9 @@ An AWS KMS key can be used by your Relayer to sign transactions. This is the rec
   Hexadecimal or AWS KMS keys.
 </Check>
 
-### Configuration[​](#configuration "Direct link to Configuration")
+### Configuration
 
-#### RPC Configuration[​](#rpc-configuration "Direct link to RPC Configuration")
+#### RPC Configuration
 
 Hyperlane Validators and Relayers can use **multiple RPC URLs** to improve reliability and redundancy. The setup varies based on the chain type.
 
@@ -87,7 +87,7 @@ SVM-based chains support configuring multiple RPC endpoints, but **only a single
   quorum-based selection mechanism.
 </Warning>
 
-#### Configuration Settings[​](#configuration-settings "Direct link to Configuration Settings")
+#### Configuration Settings
 
 Like the local setup, there are a few base arguments you should provide when configuring your Relayer.
 
@@ -107,7 +107,7 @@ Like the local setup, there are a few base arguments you should provide when con
 
 You can also provide the path to additional configuration files as a comma separated list with the [`CONFIG_FILES` environment variable](/docs/operate/config-reference#config_files). If you choose to run in Docker, see the docker section of [agent configuration](/docs/operate/agent-config) for tips on mounting your config files into your Docker container.
 
-### Setup-specific configuration[​](#setup-specific-configuration "Direct link to Setup-specific configuration")
+### Setup-specific configuration
 
 These configurations requirements differ depending on which key setup instructions you followed.
 
@@ -130,9 +130,9 @@ If you created an [AWS KMS key](/docs/operate/set-up-agent-keys), configure the 
 
 For chain-specific signers (i.e. to customize the key to use for each chain) take a look at the [configuration reference](/docs/operate/config-reference)
 
-## Start Relaying[​](#start-relaying "Direct link to Start Relaying")
+## Start Relaying
 
-### Setup[​](#setup "Direct link to Setup")
+### Setup
 
 The recommended installation method for a production environment is using a Docker image.
 
@@ -165,7 +165,7 @@ Build the Relayer:
 cargo build --release bin relayer
 ```
 
-### Running the agent[​](#running-the-agent "Direct link to Running the agent")
+### Running the agent
 
 If the Relayer's keys have been configured with AWS KMS, you will have to provide the AWS access key and secret as environment variables.
 
@@ -204,8 +204,6 @@ We can run the built binary from within the `hyperlane-monorepo/rust` directory:
 # set AWS environment variablesexport AWS_ACCESS_KEY_ID=ABCDEFGHIJKLMNOPexport AWS_SECRET_ACCESS_KEY=xX-haha-nice-try-Xx# run the Relayer./target/release/relayer \  --db /hyperlane_db \  --relayChains <chain_1_name>,<chain_2_name> \  --defaultSigner.type aws \  --defaultSigner.id alias/hyperlane-relayer-1 \  --defaultSigner.region us-east-1 \
 ```
 
-## Indexing[​](#indexing "Direct link to Indexing")
+## Indexing
 
 The Relayer needs to index all historic messages for the origin chain(s). This information is stored in a local database on disk (set with `db` in the config). This means running a Relayer for the first time may take some extra time to catch up with the current state.
-
-[Edit this page](https://github.com/hyperlane-xyz/v3-docs/tree/main/docs/operate/relayer/run-relayer.mdx)

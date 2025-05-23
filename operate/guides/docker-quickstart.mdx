@@ -1,13 +1,14 @@
 ---
 title: "Quickstart with Docker Compose and AWS"
-description: "Using Docker Compose provides a structured way to manage validator deployments while maintaining the flexibility of raw Docker. You can find the full specification of the format in the ."
 ---
 
-## 1. Setup validator key[​](#1-setup-validator-key "Direct link to 1. Setup validator key")
+Using Docker Compose provides a structured way to manage validator deployments while maintaining the flexibility of raw Docker. You can find the full specification of the format in the .
+
+## 1. Setup validator key
 
 Follow the guide [here](/docs/operate/set-up-agent-keys#2-aws-kms) for creating agent keys with AWS KMS.
 
-## 2. Create S3 bucket for signatures[​](#2-create-s3-bucket-for-signatures "Direct link to 2. Create S3 bucket for signatures")
+## 2. Create S3 bucket for signatures
 
 Follow the guide [here](/docs/operate/validators/validator-signatures-aws) for creating and configuring an S3 bucket for your validator to write signatures to.
 
@@ -15,9 +16,9 @@ Follow the guide [here](/docs/operate/validators/validator-signatures-aws) for c
 
 If you are an AVS operator, follow the guide [here](/docs/guides/avs-operator-guide#4-register-your-operator) to register with the Hyperlane AVS.
 
-## 4. Setup validator environment[​](#4-setup-validator-environment "Direct link to 4. Setup validator environment")
+## 4. Setup validator environment
 
-### Create config files[​](#create-config-files "Direct link to Create config files")
+### Create config files
 
 In this example, we will run three chains.
 
@@ -25,7 +26,7 @@ In this example, we will run three chains.
 mkdir -p ethereum/hyperlane_db optimism/hyperlane_db base/hyperlane_db && \touch ethereum/config.json optimism/config.json base/config.json docker-compose.yml .env.ethereum .env.optimism .env.base
 ```
 
-### Edit each config.json[​](#edit-each-configjson "Direct link to Edit each config.json")
+### Edit each config.json
 
 You can read more about Agent Configs [here](/docs/operate/agent-config).
 
@@ -48,7 +49,7 @@ Here is an example agent config.
 {  "chains": {    "ethereum": {      "customRpcUrls": "https://eth.llamarpc.com,https://rpc.mevblocker.io",      "signer": {        "region": "us-east-1",        "type": "aws",        "id": "alias/hyperlane-validator-signer"      }    }  },  "originChainName": "ethereum",  "db": "/mnt/hyperlane_db",  "validator": {    "id": "alias/hyperlane-validator",    "type": "aws",    "region": "us-east-1"  },  "checkpointSyncer": {    "bucket": "hyperlane-validator-signatures",    "region": "us-east-1",    "type": "s3",    "folder": "ethereum"  },  "reorgPeriod": 14,  "metricsPort": "9090"}
 ```
 
-### Edit each .env file[​](#edit-each-env-file "Direct link to Edit each .env file")
+### Edit each .env file
 
 You should change the service name, AWS credentials for each chain.
 
@@ -68,7 +69,7 @@ Your directory structure should look similar to this:
 .├── base│   ├── config.json│   └── hyperlane_db├── docker-compose.yml├── ethereum│   ├── config.json│   └── hyperlane_db├── .env.base├── .env.ethereum├── .env.optimism└── optimism    ├── config.json    └── hyperlane_db
 ```
 
-## 6. Run the Hyperlane validators[​](#6-run-the-hyperlane-validators "Direct link to 6. Run the Hyperlane validators")
+## 6. Run the Hyperlane validators
 
 Bring the containers up:
 
@@ -85,7 +86,8 @@ docker logs -f ethereum-validatordocker logs -f optimism-validatordocker logs -f
 ```
 
 <Check>
-  **Running Multiple Validators**: Running multiple validators improves reliability and ensures message validation continues even if one fails. Learn more about the setup and requirements [here](/docs/operate/validators/run-validators#running-multiple-validators).
+  **Running Multiple Validators**: Running multiple validators improves
+  reliability and ensures message validation continues even if one fails. Learn
+  more about the setup and requirements
+  [here](/docs/operate/validators/run-validators#running-multiple-validators).
 </Check>
-
-[Edit this page](https://github.com/hyperlane-xyz/v3-docs/tree/main/docs/operate/docker-quickstart.mdx)

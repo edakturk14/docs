@@ -1,17 +1,20 @@
 ---
 title: "Monitoring & Alerting"
-description: "Validators expose metrics on the port number specified by the argument . Port  is the default, though any valid port can be chosen."
 ---
+
+Validators expose metrics on the port number specified by the argument . Port is the default, though any valid port can be chosen.
 
 We recommend using Prometheus to scrape these metrics and Grafana to visualize them, using [this dashboard JSON template](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/84e8c5c218ac5d211c766cf4d5a135aee10e508c/tools/grafana/validator-dashboard-template.json), as seen below. The benefit of this dashboard is that it displays multiple validators at the same time. The screenshot shows metrics grouped by chain or by kubernetes pod.
 
 ![Validator Grafana Dashboard Template](/images/docs/operate/validators/assets/images/dashboard-template-validator-e32a2eb79095c9c4758c03dcf85061a2.png)
 
 <Info>
-  If running as a Docker image, make sure to port-forward the metrics endpoint port. For instance, to forward port 9090 on the local port 80, add the following flag to your `docker run` command: `-p 9090:80`
+  If running as a Docker image, make sure to port-forward the metrics endpoint
+  port. For instance, to forward port 9090 on the local port 80, add the
+  following flag to your `docker run` command: `-p 9090:80`
 </Info>
 
-## Metrics[​](#metrics "Direct link to Metrics")
+## Metrics
 
 The dashboard template includes the following metrics.
 
@@ -25,7 +28,7 @@ The dashboard template includes the following metrics.
 | `hyperlane_span_events_total{agent="validator", event_level="error"}` | The total number of errors logged, visualized as 30 min increases ("Error log count diffs"). If the derivative of this metric exceeds 1 over the last hour, at least a low-severity alert is warranted. Note that the dashboard query groups metrics by kubernetes pod name, so you may need to adjust this query if you are not running in a kubernetes environment.     |
 | `hyperlane_span_events_total{agent="validator", event_level="warn"}`  | The total number of warnings logged, visualized as 30 min increases ("Warning log count diffs"). If the derivative of this metric exceeds 1 over the last hour, at least a low-severity alert is warranted. Note that the dashboard query groups metrics by kubernetes pod name, so you may need to adjust this query if you are not running in a kubernetes environment. |
 
-## Charts[​](#charts "Direct link to Charts")
+## Charts
 
 The dashboard template includes the following charts.
 
@@ -40,13 +43,11 @@ The dashboard template includes the following charts.
 | `Error log count diffs (30m)`           | The total number of errors logged, visualized as 30 min increases ("Error log count diffs"). If the derivative of this metric exceeds 1 over the last hour, at least a low-severity alert is warranted. Note that the dashboard query groups metrics by kubernetes pod name, so you may need to adjust this query if you are not running in a kubernetes environment.     |
 | `Warning log count diffs (30m)`         | The total number of warnings logged, visualized as 30 min increases ("Warning log count diffs"). If the derivative of this metric exceeds 1 over the last hour, at least a low-severity alert is warranted. Note that the dashboard query groups metrics by kubernetes pod name, so you may need to adjust this query if you are not running in a kubernetes environment. |
 
-## Alerts[​](#alerts "Direct link to Alerts")
+## Alerts
 
 All the metrics above can be combined to create alerts that minimize false positives. Some example critical alerts:
 
-* the `hyperlane_latest_checkpoint` stopped increasing, but the `hyperlane_block_height` is still increasing, and `error` and `warn` log counts have also been increasing, over the last 6 hours
-* `hyperlane_block_height` has not increased in the last 30 minutes
+- the `hyperlane_latest_checkpoint` stopped increasing, but the `hyperlane_block_height` is still increasing, and `error` and `warn` log counts have also been increasing, over the last 6 hours
+- `hyperlane_block_height` has not increased in the last 30 minutes
 
 If you get alerted, always check the logs for what the problem could be.
-
-[Edit this page](https://github.com/hyperlane-xyz/v3-docs/tree/main/docs/operate/validators/monitoring-alerting.mdx)

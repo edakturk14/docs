@@ -181,7 +181,7 @@
         "tab": "Agent Operators",
         "groups": [
           {
-            "group": "Overview Agents",
+            "group": "Introduction",
             "pages": ["operate/overview-agents"]
           },
           {
