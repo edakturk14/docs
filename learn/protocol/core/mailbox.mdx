@@ -1,14 +1,16 @@
 ---
 title: "Mailbox"
-description: "The Hyperlane  smart contracts expose an on-chain API for sending and receiving interchain messages. There is a  contract deployed on every chain Hyperlane supports."
+description: "Core smart contract interface for sending and receiving cross-chain messages in Hyperlane"
 ---
+
+The Hyperlane smart contracts expose an on-chain API for sending and receiving interchain messages. There is a contract deployed on every chain Hyperlane supports.
 
 The network of `Mailboxes` facilitates the connective tissue between blockchains that developers leverage to create interchain applications, and add interchain functionality to their existing applications.
 
 - To [**send**](/docs/reference/messaging/send) interchain messages, call the `dispatch` function.
 - To [**receive**](/docs/reference/messaging/receive) interchain messages, implement the `handle` function.
 
-## Interface[​](#interface "Direct link to Interface")
+## Interface
 
 The [`IMailbox`](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/main/solidity/contracts/interfaces/IMailbox.sol) interface exposes two state-mutating functions; `dispatch()` and `process()`, which are used to send and receive messages, respectively.
 
@@ -23,7 +25,7 @@ The [`IMailbox`](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/main/s
 
 </Accordion>
 
-### Message Headers[​](#message-headers "Direct link to Message Headers")
+### Message Headers
 
 The Mailbox prepends message bodies with a header containing the following fields:
 
@@ -38,7 +40,7 @@ The Mailbox prepends message bodies with a header containing the following field
 
 See the [`Message` library](/docs/reference/libraries/message) for more information on the message encoding.
 
-### Uniqueness[​](#uniqueness "Direct link to Uniqueness")
+### Uniqueness
 
 The `nonce` is a monotonically increasing integer for each message sent from a given Mailbox. It is incremented each time a message is dispatched to serve as a separator for otherwise identical messages.
 
@@ -50,11 +52,11 @@ function delivered(bytes32 messageId) external view returns (bool);
 
 The `messageId` is a globally unique message identifier, returned from the `dispatch` call, computed as the `keccak256` hash of the message (with headers).
 
-### Replay Protection[​](#replay-protection "Direct link to Replay Protection")
+### Replay Protection
 
 The Mailbox maintains a mapping of already delivered `messageId` values to prevent replay attacks. If a message is received with a `messageId` that has already been delivered, the message is rejected.
 
-## Dispatch[​](#dispatch "Direct link to Dispatch")
+## Dispatch
 
 To send interchain messages, developers call `Mailbox.dispatch()`.
 
@@ -62,7 +64,7 @@ This function takes as parameters the message contents, the destination chain ID
 
 Hyperlane's proof of stake protocol uses this merkle tree to verify fraud proofs.
 
-## Process[​](#process "Direct link to Process")
+## Process
 
 To deliver interchain messages, the [relayer](/docs/protocol/agents/relayer) calls `Mailbox.process()`.
 
@@ -75,5 +77,3 @@ The `Mailbox` will pass the message and metadata to the recipient's interchain s
   [`Message.sol`](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/main/solidity/contracts/libs/Message.sol)for
   more details on Hyperlane message encoding
 </Info>
-
-[Edit this page](https://github.com/hyperlane-xyz/v3-docs/tree/main/docs/protocol/mailbox.mdx)

@@ -147,15 +147,52 @@
           {
             "group": "Protocol",
             "pages": [
-              {
-                "group": "Mailbox",
-                "pages": ["learn/protocol/general-message-passing/mailbox"]
-              },
+              "learn/protocol/core/mailbox",
+              "learn/protocol/core/general-message-passing/fees",
+              "learn/protocol/core/interchain-gas-payment",
+              "learn/protocol/core/post-dispatch-hooks/overview",
               {
                 "group": "Modular Security",
-                "pages": ["learn/protocol/ISM/modular-security"]
+                "pages": [
+                  "learn/protocol/ISM/modular-security",
+                  {
+                    "group": "Economic Security",
+                    "pages": [
+                      "learn/protocol/ISM/economic-security/overview",
+                      "learn/protocol/ISM/economic-security/hyperlane-avs"
+                    ]
+                  }
+                ]
               },
-              "learn/protocol/agents/overview"
+              {
+                "group": "Hyperlane Agents",
+                "pages": [
+                  "learn/protocol/agents/overview",
+                  "learn/protocol/agents/validators",
+                  "learn/protocol/agents/relayer"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Reference",
+            "pages": [
+              {
+                "group": "Send & Receive",
+                "pages": [
+                  "learn/reference/general-message-passing/send",
+                  "learn/reference/general-message-passing/receive"
+                ]
+              },
+              {
+                "group": "Hooks",
+                "pages": [
+                  "learn/reference/post-dispatch-hooks/interchain-gas",
+                  "learn/reference/post-dispatch-hooks/op-stack",
+                  "learn/reference/post-dispatch-hooks/arbitrum-L2-to-L1",
+                  "learn/reference/post-dispatch-hooks/polygon-pos"
+                ]
+              }
             ]
           },
           {

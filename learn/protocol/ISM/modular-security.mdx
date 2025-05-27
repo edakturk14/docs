@@ -1,49 +1,51 @@
 ---
-title: "Modular Security"
-description: "Hyperlane is secured by  (ISMs). ISMs are smart contracts that are responsible for verifying that interchain messages being delivered on the destination chain were  on the origin chain."
+title: "Overview"
+description: "Overview of Hyperlane's Interchain Security Modules (ISMs)"
 ---
 
-## Core Concepts[​](#core-concepts "Direct link to Core Concepts")
+Hyperlane is secured by (ISMs). ISMs are smart contracts that are responsible for verifying that interchain messages being delivered on the destination chain were on the origin chain.
 
-### Default vs Custom ISM[​](#default-vs-custom-ism "Direct link to Default vs Custom ISM")
+## Core Concepts
+
+### Default vs Custom ISM
 
 Developers can either use the [Mailbox's](/docs/protocol/mailbox) default ISM or specify their own application-specific ISM.
 
 Application-specific ISM can be:
 
-* **Configured**: Use pre-built ISMs with custom parameters
-* **Composed**: Combine multiple ISMs together like security "legos"
-* **Customized**: Create entirely new ISMs tailored to specific needs
+- **Configured**: Use pre-built ISMs with custom parameters
+- **Composed**: Combine multiple ISMs together like security "legos"
+- **Customized**: Create entirely new ISMs tailored to specific needs
 
 <Info>
-  The "default ISM" refers to the pre-configured security module on the Mailbox contract (that is the Multisig ISM) which is used when applications don't specify their own custom ISM.
+  The "default ISM" refers to the pre-configured security module on the Mailbox
+  contract (that is the Multisig ISM) which is used when applications don't
+  specify their own custom ISM.
 </Info>
 
-#### Configure[​](#configure "Direct link to Configure")
+#### Configure
 
 Hyperlane defines a set of [pre-built ISMs](#standard-isms). Developers can deploy any of these contracts "off-the-shelf" and configure them with their own parameters.
 
 For example, application developers that want increased sovereignty over interchain security could deploy a [Multisig ISM](/docs/protocol/ISM/multisig-ISM) configured with validators sourced from their own community.
 
-#### Compose[​](#compose "Direct link to Compose")
+#### Compose
 
 ISMs act as "security legos". Developers can mix and match different ISMs together to encode a security model that best fits their needs.
 
 For example, application developers that want additional security could deploy an [Aggregation ISM](/docs/protocol/ISM/aggregation-ISM) that requires verification by both a [Multisig ISM](/docs/protocol/ISM/multisig-ISM) configured with validators from the Hyperlane community, **and** a Wormhole ISM that verifies that a quorum of the [Wormhole](https://wormhole.com/) validator set verified the message.
 
-#### Customize[​](#customize "Direct link to Customize")
+#### Customize
 
 ISMs are fully customizable. Developers can write their own ISMs, tailoring them to the needs of their application.
 
 For example, application developers can build ISMs that adjust security models based on message content. High value and infrequent messages (e.g. governance) could be verified by a security model that prioritizes safety over latency and gas costs. Lower value and more frequent messages could be verified by a security model that prioritizes latency and gas costs over safety.
 
-<Check>
-  Learn how to [Create your own ISM](/docs/protocol/ISM/custom-ISM)
-</Check>
+<Check>Learn how to [Create your own ISM](/docs/protocol/ISM/custom-ISM)</Check>
 
-## Available ISMs[​](#available-isms "Direct link to Available ISMs")
+## Available ISMs
 
-### Standard ISMs[​](#standard-isms "Direct link to Standard ISMs")
+### Standard ISMs
 
 Standard ISMs are pre-built modules developed by the AW team.
 
@@ -54,7 +56,7 @@ Standard ISMs are pre-built modules developed by the AW team.
 | **Aggregation ISM** | Combines multiple ISMs to require verification from several sources            | Standard |
 | **CCIP-Read ISM**   | Verifies messages using off-chain data sources                                 | Standard |
 
-### Community ISMs[​](#community-isms "Direct link to Community ISMs")
+### Community ISMs
 
 Community ISMs are developed and maintained by the community to extend ISM capabilities.
 
@@ -65,5 +67,3 @@ Community ISMs are developed and maintained by the community to extend ISM capab
 | Optimistic ISM        | Implements an optimistic verification model with a fraud window where watchers can flag fraudulent messages | Community |
 | OP Stack ISM          | Uses OP Stack rollup's settlement layer security for messages between Ethereum ↔ OP Stack rollups           | Community |
 | Arbitrum L2 to L1 ISM | Uses Arbitrum rollup's security properties for messages sent from Arbitrum L2 ↔ Ethereum                    | Community |
-
-[Edit this page](https://github.com/hyperlane-xyz/v3-docs/tree/main/docs/protocol/ISM/modular-security.mdx)
