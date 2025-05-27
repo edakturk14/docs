@@ -8,12 +8,12 @@ description: "Configure your signing key and S3 bucket"
   in AWS's Key Management Service and Validator signatures are posted publicly
   in an S3 bucket. If you're only intending to run a Validator for testing or
   development purposes, consider following the [local setup
-  guide](/docs/guides/deploy-hyperlane-local-agents) instead.
+  guide](/guides/chains/deploy-hyperlane-with-local-agents) instead.
 </Info>
 
 ### 1. Create an AWS IAM user, and a signing key
 
-Follow the instructions in [Agent Keys](/docs/operate/set-up-agent-keys) to generate an AWS IAM user and either a KMS or a hexadecimal key. You will use this key's credentials in the following steps.
+Follow the instructions in [Agent Keys](/operate/key-management/set-up-agent-keys) to generate an AWS IAM user and either a KMS or a hexadecimal key. You will use this key's credentials in the following steps.
 
 ### 2. Create an S3 bucket
 
@@ -57,12 +57,28 @@ Your Validator IAM user will need write permissions, and it should be publicly r
 8. Scroll down to "Bucket policy" and click "Edit"
 9. Enter the following contents. The Bucket ARN is shown just above where you enter the policy
 
-```
-{  "Version": "2012-10-17",  "Statement": [    {      "Effect": "Allow",      "Principal": "*",      "Action": ["s3:GetObject", "s3:ListBucket"],      "Resource": ["${BUCKET_ARN}", "${BUCKET_ARN}/*"]    },    {      "Effect": "Allow",      "Principal": {        "AWS": "${USER_ARN}"      },      "Action": ["s3:DeleteObject", "s3:PutObject"],      "Resource": "${BUCKET_ARN}/*"    }  ]}
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": ["s3:GetObject", "s3:ListBucket"],
+      "Resource": ["${BUCKET_ARN}", "${BUCKET_ARN}/*"]
+    },
+    {
+      "Effect": "Allow",
+      "Principal": { "AWS": "${USER_ARN}" },
+      "Action": ["s3:DeleteObject", "s3:PutObject"],
+      "Resource": "${BUCKET_ARN}/*"
+    }
+  ]
+}
 ```
 
 <Info>
   Advanced users may consider using the [S3 Terraform
-  module](/docs/operate/deploy-with-terraform#iam--kms) instead to create the S3
+  module](/cs/operate/deploy-with-terraform#iam--kms) instead to create the S3
   bucket with the correct permissions.
 </Info>

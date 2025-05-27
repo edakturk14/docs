@@ -241,7 +241,7 @@ We can run the built binary from within the `hyperlane-monorepo/rust` directory:
 # set AWS environment variablesexport AWS_ACCESS_KEY_ID=ABCDEFGHIJKLMNOPexport AWS_SECRET_ACCESS_KEY=xX-haha-nice-try-Xx# run the Validator./target/release/validator \  --db /hyperlane_db \  --originChainName <your_chain_name> \  --reorgPeriod 1 \  --validator.region us-east-1 \  --checkpointSyncer.region us-east-1 \  --validator.type aws \  --chains.<your_chain_name>.signer.type aws \  --chains.<your_chain_name>.signer.region<region_name> \  --validator.id alias/hyperlane-validator-signer-<your_chain_name> \  --chains.<your_chain_name>.signer.id alias/hyperlane-validator-signer-<your_chain_name> \  --checkpointSyncer.type s3 \  --checkpointSyncer.bucket hyperlane-validator-signatures-<your_chain_name>
 ```
 
-### Announcing your Validator[​](#announcing-your-validator "Direct link to Announcing your Validator")
+### Announcing your Validator
 
 The [Relayer](/operate/relayer/run-relayer) needs to know where to find your Validator's signatures. Your Validator will automatically attempt to announce itself by writing to the `ValidatorAnnounce` contract on the chain that you're validating.
 
@@ -249,7 +249,7 @@ To do this, your Validator must have a small amount of tokens to pay for the gas
 
 If your Validator has not yet announced itself, and does not have enough tokens to pay for gas, it will log a message specifying how many tokens are needed.
 
-### Success\![​](#success "Direct link to Success!")
+### Success!
 
 The Validator will index the origin Mailbox contract for messages. If a message has been sent, you should see log messages that the Validator has signed them. If everything is configured correctly, you should see json files being written to your S3 bucket (if you followed the AWS setup) or to your local signatures directory if you followed the local setup. New json files get written every time a new outbound message is inserted into the mailbox.
 

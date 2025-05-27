@@ -3,13 +3,10 @@ title: "Run a Relayer"
 ---
 
 <Info>
-  * For an introduction on Relayers in Hyperlane, you can check out the
-  [Overview section](/docs/operate/overview-agents). * We recommend you read
-  through the [**Deploy Hyperlane Local
-  Agents**](/docs/guides/deploy-hyperlane-local-agents) guide to understand how
-  to configure and run the Relayer locally, as well as the [**Run
-  Validators**](/docs/operate/validators/run-validators) documentation before
-  trying to run a production Relayer.
+
+- For an introduction on Relayers in Hyperlane, you can check out the [Overview section](/operate/overview-agents).
+- We recommend you read through the [**Deploy Hyperlane Local Agents**](/guides/chains/deploy-hyperlane-with-local-agents) guide to understand how to configure and run the Relayer locally, as well as the [**Run Validators**](/operate/validators/run-validators) documentation before trying to run a production Relayer.
+
 </Info>
 
 ## Requirements
@@ -29,11 +26,10 @@ title: "Run a Relayer"
 ## Guide
 
 <Info>
-  * The local agent setup shows how you can run a Relayer on your *local
-  machine*, which is **only for testing and development purposes**. * We
-  strongly encourage you to follow the [local agents
-  guide](/docs/guides/deploy-hyperlane-local-agents) to understand how to
-  configure and run the Relayer locally.
+
+- The local agent setup shows how you can run a Relayer on your _local machine_, which is **only for testing and development purposes**.
+- We strongly encourage you to follow the [local agents guide](/guides/chains/deploy-hyperlane-with-local-agents) to understand how to configure and run the Relayer locally.
+
 </Info>
 
 ### Keys
@@ -49,8 +45,8 @@ A hexadecimal private key used for in-memory signing can be used by your Relayer
 An AWS KMS key can be used by your Relayer to sign transactions. This is the recommended setup for a production Relayer.
 
 <Check>
-  See the [Agent Keys](/docs/operate/set-up-agent-keys) page to set up your
-  Hexadecimal or AWS KMS keys.
+  See the [Agent Keys](/operate/key-management/set-up-agent-keys) page to set up
+  your Hexadecimal or AWS KMS keys.
 </Check>
 
 ### Configuration
@@ -65,22 +61,22 @@ Hyperlane Validators and Relayers can use **multiple RPC URLs** to improve relia
 
 EVM-based chains support configuring multiple RPC endpoints for redundancy and can specify how they are used.
 
-- **Configure multiple RPCs:** Use [`customRpcUrls`](/docs/operate/config-reference#chainschain_namecustomrpcurls).
+- **Configure multiple RPCs:** Use [`customRpcUrls`](/operate/config/config-reference#chainschain_namecustomrpcurls).
 
-- **RPC Selection Mode ([`rpcConsensusType`](/docs/operate/config-reference#chainschain_namerpcconsensustype))**:
+- **RPC Selection Mode ([`rpcConsensusType`](/operate/config/config-reference#chainschain_namerpcconsensustype))**:
 
   - **Fallback**: The agent tries the first URL and switches to the next if needed.
   - **Quorum**: Requires a majority of the URLs to agree with the exception of submitting transactions.
 
 Cosmos-based chains require both **RPC and gRPC endpoints** for proper operation.
 
-- **Configure multiple RPCs:** Use [`customRpcUrls`](/docs/operate/config-reference#chainschain_namecustomrpcurls).
+- **Configure multiple RPCs:** Use [`customRpcUrls`](/operate/config/config-reference#chainschain_namecustomrpcurls).
 - **Configure gRPC endpoints:** Use \[`customGrpcUrls`].
 - **Fallback Mechanism:** Cosmos agents always use **fallback mode**.
 
 SVM-based chains support configuring multiple RPC endpoints, but **only a single RPC is used**.
 
-- **Configure RPCs:** Use [`customRpcUrls`](/docs/operate/config-reference#chainschain_namecustomrpcurls).
+- **Configure RPCs:** Use [`customRpcUrls`](/operate/config/config-reference#chainschain_namecustomrpcurls).
 
 <Warning>
   For **SVM chains**, only a **single RPC URL** is used. There is no fallback or
@@ -94,18 +90,18 @@ Like the local setup, there are a few base arguments you should provide when con
 | Argument                        | Description                                                                                                                                                                                                                                                                                                                                               |
 | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--relayChains`                 | Comma separated names of the origin and destination chains to relay messages between. For example: `ethereum,polygon,avalanche`.                                                                                                                                                                                                                          |
-| `--db`                          | The path to where the Relayer should write persistent data to disk. Ensure this path to be persistent when using cloud setups. When using Docker, make sure to mount the persistent path/volume into the container. See [config-reference](/docs/operate/config-reference#db) for more info.                                                              |
+| `--db`                          | The path to where the Relayer should write persistent data to disk. Ensure this path to be persistent when using cloud setups. When using Docker, make sure to mount the persistent path/volume into the container. See [config-reference](/operate/config/config-reference#db) for more info.                                                            |
 | `--allowLocalCheckpointSyncers` | If `true`, this will allow the Relayer to look for Validator signatures on the Relayer's local filesystem. In a production environment, this should be `false`. If you're running a Validator on the same machine by following the Validator local setup instructions, set this to `true` so that your Relayer can access the local Validator signatures. |
 
 <Info>
-  Your Relayer takes both command line arguments and environment variables as
-  configuration. Take a look at the [agent
-  configuration](/docs/operate/agent-config) page and the [configuration
-  reference](/docs/operate/config-reference) for a full list of configuration
-  possibilities.
+
+Your Relayer takes both command line arguments and environment variables as configuration.
+
+Take a look at the [agent configuration](/operate/config/agent-config) page and the [configuration reference](/operate/config/config-reference) for a full list of configuration possibilities.
+
 </Info>
 
-You can also provide the path to additional configuration files as a comma separated list with the [`CONFIG_FILES` environment variable](/docs/operate/config-reference#config_files). If you choose to run in Docker, see the docker section of [agent configuration](/docs/operate/agent-config) for tips on mounting your config files into your Docker container.
+You can also provide the path to additional configuration files as a comma separated list with the [`CONFIG_FILES` environment variable](/operate/config/config-reference#config_files). If you choose to run in Docker, see the docker section of [agent configuration](/operate/config/agent-config) for tips on mounting your config files into your Docker container.
 
 ### Setup-specific configuration
 
@@ -114,13 +110,13 @@ These configurations requirements differ depending on which key setup instructio
 - Hexadecimal Key
 - AWS KMS Key
 
-If you created a [hexadecimal key](/docs/operate/set-up-agent-keys), configure the default signer like so:
+If you created a [hexadecimal key](/operate/key-management/set-up-agent-keys), configure the default signer like so:
 
 | Argument              | Description                                                                                        |
 | --------------------- | -------------------------------------------------------------------------------------------------- |
 | `--defaultSigner.key` | A hexadecimal private key used to sign transactions for all chains. For example: `1b3dead...beef`. |
 
-If you created an [AWS KMS key](/docs/operate/set-up-agent-keys), configure the default signer like so:
+If you created an [AWS KMS key](/operate/key-management/set-up-agent-keys), configure the default signer like so:
 
 | Argument                 | Description                                                                                                |
 | ------------------------ | ---------------------------------------------------------------------------------------------------------- |
@@ -128,7 +124,7 @@ If you created an [AWS KMS key](/docs/operate/set-up-agent-keys), configure the 
 | `--defaultSigner.id`     | The alias of your Relayer's AWS KMS key, prefixed with `alias/`. For example: `alias/hyperlane-relayer-1`. |
 | `--defaultSigner.region` | The region of your AWS KMS key. For example: `us-east-1`.                                                  |
 
-For chain-specific signers (i.e. to customize the key to use for each chain) take a look at the [configuration reference](/docs/operate/config-reference)
+For chain-specific signers (i.e. to customize the key to use for each chain) take a look at the [configuration reference](/operate/config/config-reference)
 
 ## Start Relaying
 
@@ -174,7 +170,7 @@ If the Relayer's keys have been configured with AWS KMS, you will have to provid
 | `AWS_ACCESS_KEY_ID`     | The access key ID of your Relayer's AWS IAM user.     |
 | `AWS_SECRET_ACCESS_KEY` | The secret access key of your Relayer's AWS IAM user. |
 
-For a refresher, check out the [Agent Keys](/docs/operate/set-up-agent-keys) guide.
+For a refresher, check out the [Agent Keys](/operate/key-management/set-up-agent-keys) guide.
 
 - Using Docker
 - Building from source
@@ -186,7 +182,7 @@ docker run \  -it \  -e AWS_ACCESS_KEY_ID=ABCDEFGHIJKLMNOP \  -e AWS_SECRET_ACCE
 ```
 
 <Info>
-  If you're running Validators with a local setup on the same machine and running a local Relayer to access these Validator signatures, be sure to [mount](https://docs.docker.com/storage/bind-mounts/) your local Validator's signature directory into your Relayer at the same path that you used when [announcing your Validator](/docs/operate/validators/run-validators#Announcing-your-validator)
+  If you're running Validators with a local setup on the same machine and running a local Relayer to access these Validator signatures, be sure to [mount](https://docs.docker.com/storage/bind-mounts/) your local Validator's signature directory into your Relayer at the same path that you used when [announcing your Validator](/operate/validators/run-validators#announcing-your-validator)
 
 For example, if your local Validator is writing signatures to `/tmp/hyperlane-validator-signatures-ethereum`, you should mount a directory for the Docker container:
 
