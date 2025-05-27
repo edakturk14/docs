@@ -44,10 +44,10 @@ A hexadecimal private key used for in-memory signing can be used by your Relayer
 
 An AWS KMS key can be used by your Relayer to sign transactions. This is the recommended setup for a production Relayer.
 
-<Check>
+<Tip>
   See the [Agent Keys](/operate/key-management/set-up-agent-keys) page to set up
   your Hexadecimal or AWS KMS keys.
-</Check>
+</Tip>
 
 ### Configuration
 
@@ -55,33 +55,37 @@ An AWS KMS key can be used by your Relayer to sign transactions. This is the rec
 
 Hyperlane Validators and Relayers can use **multiple RPC URLs** to improve reliability and redundancy. The setup varies based on the chain type.
 
-- EVM Chains
-- Cosmos Chains
-- SVM Chains
+<Tabs>
+  <Tab title="EVM Chains">
+    EVM-based chains support configuring multiple RPC endpoints for redundancy and can specify how they are used.
 
-EVM-based chains support configuring multiple RPC endpoints for redundancy and can specify how they are used.
+    - **Configure multiple RPCs:** Use [`customRpcUrls`](../config-reference.mdx#chainschain_namecustomrpcurls).
+    - **RPC Selection Mode ([`rpcConsensusType`](../config-reference.mdx#chainschain_namerpcconsensustype))**:
+      - **Fallback**: The agent tries the first URL and switches to the next if needed.
+      - **Quorum**: Requires a majority of the URLs to agree with the exception of submitting transactions.
 
-- **Configure multiple RPCs:** Use [`customRpcUrls`](/operate/config/config-reference#chainschain_namecustomrpcurls).
+  </Tab>
+  
+  <Tab title="Cosmos Chains">
+    Cosmos-based chains require both **RPC and gRPC endpoints** for proper operation.
 
-- **RPC Selection Mode ([`rpcConsensusType`](/operate/config/config-reference#chainschain_namerpcconsensustype))**:
+    - **Configure multiple RPCs:** Use [`customRpcUrls`](../config-reference.mdx#chainschain_namecustomrpcurls).
+    - **Configure gRPC endpoints:** Use [`customGrpcUrls`].
+    - **Fallback Mechanism:** Cosmos agents always use **fallback mode**.
 
-  - **Fallback**: The agent tries the first URL and switches to the next if needed.
-  - **Quorum**: Requires a majority of the URLs to agree with the exception of submitting transactions.
+  </Tab>
+  
+  <Tab title="SVM Chains">
+    SVM-based chains support configuring multiple RPC endpoints, but **only a single RPC is used**.
 
-Cosmos-based chains require both **RPC and gRPC endpoints** for proper operation.
+    - **Configure RPCs:** Use [`customRpcUrls`](../config-reference.mdx#chainschain_namecustomrpcurls).
 
-- **Configure multiple RPCs:** Use [`customRpcUrls`](/operate/config/config-reference#chainschain_namecustomrpcurls).
-- **Configure gRPC endpoints:** Use \[`customGrpcUrls`].
-- **Fallback Mechanism:** Cosmos agents always use **fallback mode**.
+    <Warning>
+      For **SVM chains**, only a **single RPC URL** is used. There is no fallback or quorum-based selection mechanism.
+    </Warning>
 
-SVM-based chains support configuring multiple RPC endpoints, but **only a single RPC is used**.
-
-- **Configure RPCs:** Use [`customRpcUrls`](/operate/config/config-reference#chainschain_namecustomrpcurls).
-
-<Warning>
-  For **SVM chains**, only a **single RPC URL** is used. There is no fallback or
-  quorum-based selection mechanism.
-</Warning>
+  </Tab>
+</Tabs>
 
 #### Configuration Settings
 
@@ -107,22 +111,27 @@ You can also provide the path to additional configuration files as a comma separ
 
 These configurations requirements differ depending on which key setup instructions you followed.
 
-- Hexadecimal Key
-- AWS KMS Key
+<Tabs>
+  <Tab title="Hexadecimal Key">
+    If you created a [hexadecimal key](../set-up-agent-keys.mdx), configure the default signer like so:
 
-If you created a [hexadecimal key](/operate/key-management/set-up-agent-keys), configure the default signer like so:
+    | Argument              | Description                                                                                        |
+    | --------------------- | -------------------------------------------------------------------------------------------------- |
+    | `--defaultSigner.key` | A hexadecimal private key used to sign transactions for all chains. For example: `1b3dead...beef`. |
 
-| Argument              | Description                                                                                        |
-| --------------------- | -------------------------------------------------------------------------------------------------- |
-| `--defaultSigner.key` | A hexadecimal private key used to sign transactions for all chains. For example: `1b3dead...beef`. |
+  </Tab>
+  
+  <Tab title="AWS KMS Key">
+    If you created an [AWS KMS key](../set-up-agent-keys.mdx), configure the default signer like so:
 
-If you created an [AWS KMS key](/operate/key-management/set-up-agent-keys), configure the default signer like so:
+    | Argument                 | Description                                                                                                |
+    | ------------------------ | ---------------------------------------------------------------------------------------------------------- |
+    | `--defaultSigner.type`   | Set to `aws`.                                                                                              |
+    | `--defaultSigner.id`     | The alias of your Relayer's AWS KMS key, prefixed with `alias/`. For example: `alias/hyperlane-relayer-1`. |
+    | `--defaultSigner.region` | The region of your AWS KMS key. For example: `us-east-1`.                                                  |
 
-| Argument                 | Description                                                                                                |
-| ------------------------ | ---------------------------------------------------------------------------------------------------------- |
-| `--defaultSigner.type`   | Set to `aws`.                                                                                              |
-| `--defaultSigner.id`     | The alias of your Relayer's AWS KMS key, prefixed with `alias/`. For example: `alias/hyperlane-relayer-1`. |
-| `--defaultSigner.region` | The region of your AWS KMS key. For example: `us-east-1`.                                                  |
+  </Tab>
+</Tabs>
 
 For chain-specific signers (i.e. to customize the key to use for each chain) take a look at the [configuration reference](/operate/config/config-reference)
 
@@ -132,34 +141,43 @@ For chain-specific signers (i.e. to customize the key to use for each chain) tak
 
 The recommended installation method for a production environment is using a Docker image.
 
-- Docker image
-- Building from source
+<Tabs>
+  <Tab title="Docker image">
+    First download the docker image:
 
-First download the docker image:
+    ```bash
+    docker pull --platform linux/amd64 gcr.io/abacus-labs-dev/hyperlane-agent:agents-v1.4.0
+    ```
 
-```
-docker pull --platform linux/amd64 gcr.io/abacus-labs-dev/hyperlane-agent:agents-v1.4.0
-```
+  </Tab>
+  
+  <Tab title="Building from source">
+    **Clone and setup**
 
-**Clone and setup**
+    First, clone the Hyperlane monorepo:
 
-First, clone the Hyperlane monorepo:
+    ```sh
+    git clone git@github.com:hyperlane-xyz/hyperlane-monorepo.git
+    ```
 
-```
-git clone git@github.com:hyperlane-xyz/hyperlane-monorepo.git
-```
+    Then follow the [setup instructions](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/main/rust/README.md) in the `rust` directory. This should setup `rustup` as well as Rosetta 2 if you are on Apple Silicon.
 
-Then follow the [setup instructions](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/main/rust/README.md) in the `rust` directory. This should setup `rustup` as well as Rosetta 2 if you are on Apple Silicon.
+    ```sh
+    # install rustup
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
-```
-# install rustupcurl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh# (apple silicon only) install rosetta 2softwareupdate --install-rosetta --agree-to-license
-```
+    # (apple silicon only) install rosetta 2
+    softwareupdate --install-rosetta --agree-to-license
+    ```
 
-Build the Relayer:
+    Build the Relayer:
 
-```
-cargo build --release bin relayer
-```
+    ```sh
+    cargo build --release bin relayer
+    ```
+
+  </Tab>
+</Tabs>
 
 ### Running the agent
 
@@ -172,33 +190,69 @@ If the Relayer's keys have been configured with AWS KMS, you will have to provid
 
 For a refresher, check out the [Agent Keys](/operate/key-management/set-up-agent-keys) guide.
 
-- Using Docker
-- Building from source
+<Tabs>
+  <Tab title="Using Docker">
+    Then start the container with the relevant arguments. For example, your configuration for AWS:
 
-Then start the container with the relevant arguments. For example, your configuration for AWS:
+    ```sh
+    docker run \
+      -it \
+      -e AWS_ACCESS_KEY_ID=ABCDEFGHIJKLMNOP \
+      -e AWS_SECRET_ACCESS_KEY=xX-haha-nice-try-Xx \
+      --mount ... \
+      gcr.io/abacus-labs-dev/hyperlane-agent:agents-v1.4.0 \
+      ./relayer \
+      --db /hyperlane_db \
+      --relayChains <chain_1_name>,<chain_2_name> \
+      --defaultSigner.type aws \
+      --defaultSigner.id alias/hyperlane-relayer-1 \
+      --defaultSigner.region us-east-1 \
+    ```
 
-```
-docker run \  -it \  -e AWS_ACCESS_KEY_ID=ABCDEFGHIJKLMNOP \  -e AWS_SECRET_ACCESS_KEY=xX-haha-nice-try-Xx \  --mount ... \  gcr.io/abacus-labs-dev/hyperlane-agent:agents-v1.4.0 \  ./relayer \  --db /hyperlane_db \  --relayChains <chain_1_name>,<chain_2_name> \  --defaultSigner.type aws \  --defaultSigner.id alias/hyperlane-relayer-1 \  --defaultSigner.region us-east-1 \
-```
+    <Info>
+      If you're running Validators with a local setup on the same machine and running a local Relayer to access these Validator signatures, be sure to [mount](https://docs.docker.com/storage/bind-mounts/) your local Validator's signature directory into your Relayer at the same path that you used when [announcing your Validator](/operate/validators/run-validators#announcing-your-validator)
 
-<Info>
-  If you're running Validators with a local setup on the same machine and running a local Relayer to access these Validator signatures, be sure to [mount](https://docs.docker.com/storage/bind-mounts/) your local Validator's signature directory into your Relayer at the same path that you used when [announcing your Validator](/operate/validators/run-validators#announcing-your-validator)
+      For example, if your local Validator is writing signatures to `/tmp/hyperlane-validator-signatures-ethereum`, you should mount a directory for the Docker container:
 
-For example, if your local Validator is writing signatures to `/tmp/hyperlane-validator-signatures-ethereum`, you should mount a directory for the Docker container:
+      ```sh
+      docker run \
+        -it \
+        -e CONFIG_FILES=/config/agent-config.json \
+        --mount type=bind,source=$CONFIG_FILES,target=/config/agent-config.json,readonly \
+        --mount type=bind,source="$(pwd)"/hyperlane-validator-signatures-ethereum,target=/tmp/hyperlane-validator-signatures-ethereum,readonly \
+        --mount type=bind,source="$(pwd)"/hyperlane_db,target=/hyperlane_db \
+        gcr.io/abacus-labs-dev/hyperlane-agent:agents-v1.4.0 \
+        ./relayer \
+        --db /hyperlane_db \
+        --relayChains ethereum,polygon,avalanche \
+        --allowLocalCheckpointSyncers true \
+        --defaultSigner.key <your_relayer_key> \
+      ```
+    </Info>
 
-```
-docker run \  -it \  -e CONFIG_FILES=/config/agent-config.json \  --mount type=bind,source=$CONFIG_FILES,target=/config/agent-config.json,readonly \  --mount type=bind,source="$(pwd)"/hyperlane-validator-signatures-ethereum,target=/tmp/hyperlane-validator-signatures-ethereum,readonly \  --mount type=bind,source="$(pwd)"/hyperlane_db,target=/hyperlane_db \  gcr.io/abacus-labs-dev/hyperlane-agent:agents-v1.4.0 \  ./relayer \  --db /hyperlane_db \  --relayChains ethereum,polygon,avalanche \  --allowLocalCheckpointSyncers true \  --defaultSigner.key <your_relayer_key> \
-```
+  </Tab>
 
-</Info>
+  <Tab title="Building from source">
+    See these instructions for building from source without Docker.
 
-See these instructions for building from source without Docker.
+    We can run the built binary from within the `hyperlane-monorepo/rust` directory:
 
-We can run the built binary from within the `hyperlane-monorepo/rust` directory:
+    ```sh
+    # set AWS environment variables
+    export AWS_ACCESS_KEY_ID=ABCDEFGHIJKLMNOP
+    export AWS_SECRET_ACCESS_KEY=xX-haha-nice-try-Xx
 
-```
-# set AWS environment variablesexport AWS_ACCESS_KEY_ID=ABCDEFGHIJKLMNOPexport AWS_SECRET_ACCESS_KEY=xX-haha-nice-try-Xx# run the Relayer./target/release/relayer \  --db /hyperlane_db \  --relayChains <chain_1_name>,<chain_2_name> \  --defaultSigner.type aws \  --defaultSigner.id alias/hyperlane-relayer-1 \  --defaultSigner.region us-east-1 \
-```
+    # run the Relayer
+    ./target/release/relayer \
+      --db /hyperlane_db \
+      --relayChains <chain_1_name>,<chain_2_name> \
+      --defaultSigner.type aws \
+      --defaultSigner.id alias/hyperlane-relayer-1 \
+      --defaultSigner.region us-east-1 \
+    ```
+
+  </Tab>
+</Tabs>
 
 ## Indexing
 
