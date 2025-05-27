@@ -7,22 +7,128 @@ The Hyperlane smart contracts expose an on-chain API for sending and receiving i
 
 The network of `Mailboxes` facilitates the connective tissue between blockchains that developers leverage to create interchain applications, and add interchain functionality to their existing applications.
 
-- To [**send**](/docs/reference/messaging/send) interchain messages, call the `dispatch` function.
-- To [**receive**](/docs/reference/messaging/receive) interchain messages, implement the `handle` function.
+- To [**send**](/learn/reference/messaging/send) interchain messages, call the `dispatch` function.
+- To [**receive**](/learn/reference/messaging/receive) interchain messages, implement the `handle` function.
 
 ## Interface
 
 The [`IMailbox`](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/main/solidity/contracts/interfaces/IMailbox.sol) interface exposes two state-mutating functions; `dispatch()` and `process()`, which are used to send and receive messages, respectively.
 
 <Accordion title="IMailbox Interface">
-  ``
+```solidity
+// SPDX-License-Identifier: MIT OR Apache-2.0
+pragma solidity >=0.8.0;
 
-- Solidity
+import { IInterchainSecurityModule } from "./IInterchainSecurityModule.sol";
+import { IPostDispatchHook } from "./hooks/IPostDispatchHook.sol";
 
-```
-// SPDX-License-Identifier: MIT OR Apache-2.0pragma solidity >=0.8.0;import {IInterchainSecurityModule} from "./IInterchainSecurityModule.sol";import {IPostDispatchHook} from "./hooks/IPostDispatchHook.sol";interface IMailbox {    // ============ Events ============    /**     * @notice Emitted when a new message is dispatched via Hyperlane     * @param sender The address that dispatched the message     * @param destination The destination domain of the message     * @param recipient The message recipient address on `destination`     * @param message Raw bytes of message     */    event Dispatch(        address indexed sender,        uint32 indexed destination,        bytes32 indexed recipient,        bytes message    );    /**     * @notice Emitted when a new message is dispatched via Hyperlane     * @param messageId The unique message identifier     */    event DispatchId(bytes32 indexed messageId);    /**     * @notice Emitted when a Hyperlane message is processed     * @param messageId The unique message identifier     */    event ProcessId(bytes32 indexed messageId);    /**     * @notice Emitted when a Hyperlane message is delivered     * @param origin The origin domain of the message     * @param sender The message sender address on `origin`     * @param recipient The address that handled the message     */    event Process(        uint32 indexed origin,        bytes32 indexed sender,        address indexed recipient    );    function localDomain() external view returns (uint32);    function delivered(bytes32 messageId) external view returns (bool);    function defaultIsm() external view returns (IInterchainSecurityModule);    function defaultHook() external view returns (IPostDispatchHook);    function requiredHook() external view returns (IPostDispatchHook);    function latestDispatchedId() external view returns (bytes32);    function dispatch(        uint32 destinationDomain,        bytes32 recipientAddress,        bytes calldata messageBody    ) external payable returns (bytes32 messageId);    function quoteDispatch(        uint32 destinationDomain,        bytes32 recipientAddress,        bytes calldata messageBody    ) external view returns (uint256 fee);    function dispatch(        uint32 destinationDomain,        bytes32 recipientAddress,        bytes calldata body,        bytes calldata defaultHookMetadata    ) external payable returns (bytes32 messageId);    function quoteDispatch(        uint32 destinationDomain,        bytes32 recipientAddress,        bytes calldata messageBody,        bytes calldata defaultHookMetadata    ) external view returns (uint256 fee);    function dispatch(        uint32 destinationDomain,        bytes32 recipientAddress,        bytes calldata body,        bytes calldata customHookMetadata,        IPostDispatchHook customHook    ) external payable returns (bytes32 messageId);    function quoteDispatch(        uint32 destinationDomain,        bytes32 recipientAddress,        bytes calldata messageBody,        bytes calldata customHookMetadata,        IPostDispatchHook customHook    ) external view returns (uint256 fee);    function process(        bytes calldata metadata,        bytes calldata message    ) external payable;    function recipientIsm(        address recipient    ) external view returns (IInterchainSecurityModule module);}
-```
+interface IMailbox {
+// ============ Events ============
 
+    /**
+     * @notice Emitted when a new message is dispatched via Hyperlane
+     * @param sender The address that dispatched the message
+     * @param destination The destination domain of the message
+     * @param recipient The message recipient address on `destination`
+     * @param message Raw bytes of message
+     */
+    event Dispatch(
+        address indexed sender,
+        uint32 indexed destination,
+        bytes32 indexed recipient,
+        bytes message
+    );
+
+    /**
+     * @notice Emitted when a new message is dispatched via Hyperlane
+     * @param messageId The unique message identifier
+     */
+    event DispatchId(bytes32 indexed messageId);
+
+    /**
+     * @notice Emitted when a Hyperlane message is processed
+     * @param messageId The unique message identifier
+     */
+    event ProcessId(bytes32 indexed messageId);
+
+    /**
+     * @notice Emitted when a Hyperlane message is delivered
+     * @param origin The origin domain of the message
+     * @param sender The message sender address on `origin`
+     * @param recipient The address that handled the message
+     */
+    event Process(
+        uint32 indexed origin,
+        bytes32 indexed sender,
+        address indexed recipient
+    );
+
+    function localDomain() external view returns (uint32);
+
+    function delivered(bytes32 messageId) external view returns (bool);
+
+    function defaultIsm() external view returns (IInterchainSecurityModule);
+
+    function defaultHook() external view returns (IPostDispatchHook);
+
+    function requiredHook() external view returns (IPostDispatchHook);
+
+    function latestDispatchedId() external view returns (bytes32);
+
+    function dispatch(
+        uint32 destinationDomain,
+        bytes32 recipientAddress,
+        bytes calldata messageBody
+    ) external payable returns (bytes32 messageId);
+
+    function quoteDispatch(
+        uint32 destinationDomain,
+        bytes32 recipientAddress,
+        bytes calldata messageBody
+    ) external view returns (uint256 fee);
+
+    function dispatch(
+        uint32 destinationDomain,
+        bytes32 recipientAddress,
+        bytes calldata body,
+        bytes calldata defaultHookMetadata
+    ) external payable returns (bytes32 messageId);
+
+    function quoteDispatch(
+        uint32 destinationDomain,
+        bytes32 recipientAddress,
+        bytes calldata messageBody,
+        bytes calldata defaultHookMetadata
+    ) external view returns (uint256 fee);
+
+    function dispatch(
+        uint32 destinationDomain,
+        bytes32 recipientAddress,
+        bytes calldata body,
+        bytes calldata customHookMetadata,
+        IPostDispatchHook customHook
+    ) external payable returns (bytes32 messageId);
+
+    function quoteDispatch(
+        uint32 destinationDomain,
+        bytes32 recipientAddress,
+        bytes calldata messageBody,
+        bytes calldata customHookMetadata,
+        IPostDispatchHook customHook
+    ) external view returns (uint256 fee);
+
+    function process(
+        bytes calldata metadata,
+        bytes calldata message
+    ) external payable;
+
+    function recipientIsm(
+        address recipient
+    ) external view returns (IInterchainSecurityModule module);
+
+}
+
+````
 </Accordion>
 
 ### Message Headers
@@ -38,17 +144,15 @@ The Mailbox prepends message bodies with a header containing the following field
 | `destination` | The domain of the destination chain                            |
 | `recipient`   | The address of the recipient on the destination chain          |
 
-See the [`Message` library](/docs/reference/libraries/message) for more information on the message encoding.
+See the [`Message` library](/learn/reference/libraries/message) for more information on the message encoding.
 
 ### Uniqueness
 
 The `nonce` is a monotonically increasing integer for each message sent from a given Mailbox. It is incremented each time a message is dispatched to serve as a separator for otherwise identical messages.
 
-- Solidity
-
-```
+```solidity
 function delivered(bytes32 messageId) external view returns (bool);
-```
+````
 
 The `messageId` is a globally unique message identifier, returned from the `dispatch` call, computed as the `keccak256` hash of the message (with headers).
 
@@ -66,7 +170,7 @@ Hyperlane's proof of stake protocol uses this merkle tree to verify fraud proofs
 
 ## Process
 
-To deliver interchain messages, the [relayer](/docs/protocol/agents/relayer) calls `Mailbox.process()`.
+To deliver interchain messages, the [relayer](/learn/protocol/agents/relayer) calls `Mailbox.process()`.
 
 This function takes as parameters the message to deliver as well as arbitrary metadata that can be specified by the relayer.
 

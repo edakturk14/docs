@@ -1,0 +1,126 @@
+---
+title: "Create Your Own ISM"
+---
+
+Developers can specify or override the default ISM by implementing the `ISpecifiesInterchainSecurityModule` interface in their application.
+
+<Info>
+  If no ISM is specified, or if the specified ISM is the null address, the
+  default ISM configured on the destination chain's Mailbox will be used.
+</Info>
+
+## ISM Interface
+
+ISMs must implement the `IInterchainSecurityModule` interface. This implementation can be configured, composed, and customized according to the needs of their application.
+
+Specifically, this interface must be implemented in the same smart contract that implements `handle()`.
+
+The interface consists of two functions: `verify` and `moduleType`.
+
+<Accordion title="IInterchainSecurityModule Interface">
+
+```solidity Solidity
+// SPDX-License-Identifier: MIT OR Apache-2.0
+pragma solidity >=0.8.0;
+
+enum ModuleType {
+UNUSED,
+ROUTING,
+AGGREGATION,
+LEGACY_MULTISIG,
+MERKLE_ROOT_MULTISIG,
+MESSAGE_ID_MULTISIG,
+NULL, // used with relayer carrying no metadata
+CCIP_READ,
+ARB_L2_TO_L1,
+POLYGON_POS,
+OP_STACK
+}
+
+interface IInterchainSecurityModule {
+/\*\*
+_ @notice Returns an enum that represents the type of security model
+_ encoded by this ISM.
+_ @dev Relayers infer how to fetch and format metadata.
+_/
+function moduleType() external view returns (uint8);
+
+    /**
+     * @notice Defines a security model responsible for verifying interchain
+     * messages based on the provided metadata.
+     * @param _metadata Off-chain metadata provided by a relayer, specific to
+     * the security model encoded by the module (e.g. validator signatures)
+     * @param _message Hyperlane encoded interchain message
+     * @return True if the message was verified
+     */
+    function verify(
+        bytes calldata _metadata,
+        bytes calldata _message
+    ) external returns (bool);
+
+}
+
+```
+
+</Accordion>
+
+## Verify
+
+```solidity
+function verify(
+    bytes calldata _metadata,
+    bytes calldata _message
+) external returns (bool);
+```
+
+The primary function that ISMs must implement is `verify()`. The [Mailbox](../mailbox.mdx) will call `IInterchainSecurityModule.verify()` before delivering a message to its recipient. If `verify()` reverts or returns `false`, the message will not be delivered.
+
+### Parameters
+
+- `_metadata`: consists of arbitrary bytes provided by the [Relayer](../agents/relayer.mdx). Typically, these bytes are specific to the ISM. For example, the `_metadata` for a [Multisig ISM](multisig-ISM.mdx) must include validator signatures.
+
+- `_message`: consists of the Hyperlane message being verified. ISMs can use this to inspect details about the message being verified. For example, a [Multisig ISM](multisig-ISM.mdx) could change validator sets based on the origin chain of the message.
+
+<Warning>
+  See the
+  [`Message.sol`](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/main/solidity/contracts/libs/Message.sol)
+  library for more information on the format of the Hyperlane message passed to
+  `verify()`.
+</Warning>
+
+## Module Type
+
+The secondary function that ISMs must implement is `moduleType()`.
+
+```solidity
+function moduleType() external view returns (uint8);
+```
+
+This is used to signal to the [Relayer](../agents/relayer.mdx) what to include in `_metadata`. ISMs **must** return one of the supported module types.
+
+```solidity
+enum ModuleType {
+    UNUSED,
+    ROUTING,
+    AGGREGATION,
+    LEGACY_MULTISIG,
+    MERKLE_ROOT_MULTISIG,
+    MESSAGE_ID_MULTISIG,
+    NULL, // used with relayer carrying no metadata
+    CCIP_READ,
+    ARB_L2_TO_L1,
+    POLYGON_POS,
+    OP_STACK
+}
+```
+
+<Info>
+  - All ISM contracts must implement the ISM interface, which requires
+  `moduleType` to be defined. This type is branched on by the Relayer in order
+  to determine the required metadata for that ISM. For more information on
+  module types and their metadata formats, see
+  [Protocol](/docs/protocol/ISM/modular-security.mdx#module-type). - For more
+  information on the available module types and their respective metadata,
+  please visit the ISM docs outlined in this section, e.g. [Multisig
+  ISM](./multisig-ISM.mdx).
+</Info>
