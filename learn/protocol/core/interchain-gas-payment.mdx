@@ -1,11 +1,11 @@
 ---
 title: "Interchain Gas Payments"
-description: "How to pay relayer for cross-chain message delivery using Hyperlane's InterchainGasPaymaster"
+description: "How to pay the Relayer for cross-chain message delivery using Hyperlane's InterchainGasPaymaster"
 ---
 
 Successful interchain messages require two transactions; one on the origin chain to send the message, and one on the destination chain to deliver the message.
 
-For convenience, Hyperlane provides an onchain interface on the origin chain that allows message senders to pay [fees](#interchain-gas-payment-calculation) to the [relayer](./agents/relayer.mdx) to deliver a message on the destination chain. This payment is called an **interchain gas payment**.
+For convenience, Hyperlane provides an onchain interface on the origin chain that allows message senders to pay [fees](#interchain-gas-payment-calculation) to the [Relayer](/learn/protocol/agents/relayer) to deliver a message on the destination chain. This payment is called an **interchain gas payment**.
 
 ```mermaid
 flowchart LR
@@ -32,7 +32,7 @@ flowchart LR
 
 ## Interchain Gas Payment Process
 
-To [deliver a message](../reference/messaging/receive.mdx), a transaction must be included on the destination chain that calls the Mailbox `process` function with the encoded message and ISM metadata.
+To [deliver a message](/learn/reference/messaging/send), a transaction must be included on the destination chain that calls the Mailbox `process` function with the encoded message and ISM metadata.
 
 ```mermaid
 flowchart LR
@@ -50,7 +50,7 @@ flowchart LR
     IGP -. "value" .- Relayer
 ```
 
-For convenience, a [relayer](../operate/relayer/run-relayer.mdx) watches for dispatched messages and will submit process transactions on behalf of the message sender if they receive sufficient payment on the origin chain. This is the _interchain gas payment_.
+For convenience, a [Relayer](/operate/relayer/run-relayer) watches for dispatched messages and will submit process transactions on behalf of the message sender if they receive sufficient payment on the origin chain. This is the _interchain gas payment_.
 
 ```mermaid
 flowchart LR
@@ -64,15 +64,15 @@ flowchart LR
     Relayer -- "process{gasLimit}(...)" --> M_D
 ```
 
-Because messages can trigger arbitrary code execution, the relayer must meter the [`handle` call](../reference/messaging/receive.mdx#handle) with a `gasLimit` to charge appropriately at message dispatch time.
+Because messages can trigger arbitrary code execution, the Relayer must meter the [`handle` call](/learn/reference/messaging/receive#handle) with a `gasLimit` to charge appropriately at message dispatch time.
 
 ## InterchainGasPaymasters
 
 Interchain gas payments are facilitated by `InterchainGasPaymaster` (IGP) smart contracts.
 
-These contracts expose the [InterchainGasPaymaster interface](../reference/hooks/interchain-gas.mdx), which allow message senders to pay the [relayer](./agents/relayer.mdx) with native tokens on the origin chain to cover the costs of delivering a message on the destination chain.
+These contracts expose the [InterchainGasPaymaster interface](../reference/hooks/interchain-gas.mdx), which allow message senders to pay the Relayer with native tokens on the origin chain to cover the costs of delivering a message on the destination chain.
 
-Each `InterchainGasPaymaster` contract corresponds to exactly one relayer. You can find addresses of the Abacus Works' relayer under [addresses](../reference/contract-addresses.mdx).
+Each `InterchainGasPaymaster` contract corresponds to exactly one Relayer. You can find addresses of the Abacus Works' Relayer under [addresses](../reference/contract-addresses.mdx).
 
 ### Interchain Gas Payment Calculation
 
@@ -80,23 +80,27 @@ The interchain gas payment is calculated as follows:
 
 $$
 destinationTxCost = destinationGasPrice * gasLimit
-\\[5pt]
+$$
+
+$$
 exchangeRate = \frac{originGasTokenPrice}{destinationGasTokenPrice}
-\\[5pt]
+$$
+
+$$
 originFee = exchangeRate * destinationTxCost
 $$
 
-The `gasLimit` and the `exchangeRate` are configured by the message sender and the relayer, respectively.
+The `gasLimit` and the `exchangeRate` are configured by the message sender and the Relayer, respectively.
 
 ## Trust Assumptions
 
-Interchain gas payments are based on a social contract between the message sender and relayer. In other words, a relayer may receive interchain gas payments without delivering the corresponding messages. Therefore, when making interchain gas payments, it is recommended to use an IGP contract that is associated with a known and reputable relayer.
+Interchain gas payments are based on a social contract between the message sender and Relayer. In other words, a Relayer may receive interchain gas payments without delivering the corresponding messages. Therefore, when making interchain gas payments, it is recommended to use an IGP contract that is associated with a known and reputable Relayer.
 
-An honest relayer implementation will honor any successful gas payments made to its IGP, no matter how many tokens were actually paid. By keeping [gas oracles](../reference/hooks/interchain-gas.mdx) up to date, the relayer can ensure that gas payments succeed if and only if a "fair" price was paid.
+An honest Relayer implementation will honor any successful gas payments made to its IGP, no matter how many tokens were actually paid. By keeping [gas oracles](../reference/hooks/interchain-gas.mdx) up to date, the Relayer can ensure that gas payments succeed if and only if a "fair" price was paid.
 
-There are no trust assumptions with respect to relayers in the Hyperlane protocol, and under no circumstances will a malicious relayer be able to censor or falsify messages. The worst thing that a relayer can do is accept payments without delivering a message.
+There are no trust assumptions with respect to Relayers in the Hyperlane protocol, and under no circumstances will a malicious Relayer be able to censor or falsify messages. The worst thing that a Relayer can do is accept payments without delivering a message.
 
 ## Learn More
 
-- For details on gas limit calculations, benchmarking recommendations, gas oracles, and destination gas configuration, refer to [Interchain Gas Payment Details](../reference/hooks/interchain-gas.mdx).
-- For relayer setups and implementation guidance, see the [relayer](./agents/relayer.mdx) section.
+- For details on gas limit calculations, benchmarking recommendations, gas oracles, and destination gas configuration, refer to [Interchain Gas Payment Details](/learn/reference/hooks/interchain-gas).
+- For Relayer setups and implementation guidance, see the [Relayer](/operate/relayer/run-relayer) section.

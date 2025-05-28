@@ -15,16 +15,16 @@ The network of `Mailboxes` facilitates the connective tissue between blockchains
 The [`IMailbox`](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/main/solidity/contracts/interfaces/IMailbox.sol) interface exposes two state-mutating functions; `dispatch()` and `process()`, which are used to send and receive messages, respectively.
 
 <Accordion title="IMailbox Interface">
+
 ```solidity
 // SPDX-License-Identifier: MIT OR Apache-2.0
 pragma solidity >=0.8.0;
 
-import { IInterchainSecurityModule } from "./IInterchainSecurityModule.sol";
-import { IPostDispatchHook } from "./hooks/IPostDispatchHook.sol";
+import {IInterchainSecurityModule} from "./IInterchainSecurityModule.sol";
+import {IPostDispatchHook} from "./hooks/IPostDispatchHook.sol";
 
 interface IMailbox {
-// ============ Events ============
-
+    // ============ Events ============
     /**
      * @notice Emitted when a new message is dispatched via Hyperlane
      * @param sender The address that dispatched the message
@@ -125,10 +125,9 @@ interface IMailbox {
     function recipientIsm(
         address recipient
     ) external view returns (IInterchainSecurityModule module);
-
 }
+```
 
-````
 </Accordion>
 
 ### Message Headers
@@ -150,9 +149,13 @@ See the [`Message` library](/learn/reference/libraries/message) for more informa
 
 The `nonce` is a monotonically increasing integer for each message sent from a given Mailbox. It is incremented each time a message is dispatched to serve as a separator for otherwise identical messages.
 
-```solidity
+<CodeGroup>
+
+```solidity Solidity
 function delivered(bytes32 messageId) external view returns (bool);
-````
+```
+
+</CodeGroup>
 
 The `messageId` is a globally unique message identifier, returned from the `dispatch` call, computed as the `keccak256` hash of the message (with headers).
 
@@ -176,8 +179,8 @@ This function takes as parameters the message to deliver as well as arbitrary me
 
 The `Mailbox` will pass the message and metadata to the recipient's interchain security module for verification. If the ISM successfully verifies the message, the `Mailbox` delivers the message to the recipient by calling `recipient.handle()`.
 
-<Info>
+<Note>
   See
-  [`Message.sol`](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/main/solidity/contracts/libs/Message.sol)for
-  more details on Hyperlane message encoding
-</Info>
+  [`Message.sol`](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/main/solidity/contracts/libs/Message.sol)
+  for more details on Hyperlane message encoding
+</Note>
