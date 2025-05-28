@@ -3,13 +3,13 @@ title: "AWS Signatures Bucket Setup"
 description: "Configure your signing key and S3 bucket"
 ---
 
-<Info>
-  These instructions are for a production environment where Validator keys exist
-  in AWS's Key Management Service and Validator signatures are posted publicly
-  in an S3 bucket. If you're only intending to run a Validator for testing or
-  development purposes, consider following the [local setup
-  guide](/guides/chains/deploy-hyperlane-with-local-agents) instead.
-</Info>
+<Note>
+
+These instructions are for a production environment where Validator keys exist in AWS's Key Management Service and Validator signatures are posted publicly in an S3 bucket.
+
+If you're only intending to run a Validator for testing or development purposes, consider following the [local setup guide](/guides/chains/deploy-hyperlane-with-local-agents) instead.
+
+</Note>
 
 ### 1. Create an AWS IAM user, and a signing key
 
@@ -17,10 +17,10 @@ Follow the instructions in [Agent Keys](/operate/key-management/set-up-agent-key
 
 ### 2. Create an S3 bucket
 
-<Info>
+<Note>
   Note that Step 1 (creating the IAM user) is required for setting up the S3
   bucket, so is required regardless of the type of key used.
-</Info>
+</Note>
 
 Your Validator will post their signatures to this bucket.
 
@@ -77,8 +77,8 @@ Your Validator IAM user will need write permissions, and it should be publicly r
 }
 ```
 
-<Info>
+<Tip>
   Advanced users may consider using the [S3 Terraform
-  module](/cs/operate/deploy-with-terraform#iam--kms) instead to create the S3
-  bucket with the correct permissions.
-</Info>
+  module](/operate/guides/deploy-with-terraform#modules) instead to create the
+  S3 bucket with the correct permissions.
+</Tip>

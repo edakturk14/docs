@@ -2,12 +2,12 @@
 title: "Run a Relayer"
 ---
 
-<Info>
+<Note>
 
 - For an introduction on Relayers in Hyperlane, you can check out the [Overview section](/operate/overview-agents).
 - We recommend you read through the [**Deploy Hyperlane Local Agents**](/guides/chains/deploy-hyperlane-with-local-agents) guide to understand how to configure and run the Relayer locally, as well as the [**Run Validators**](/operate/validators/run-validators) documentation before trying to run a production Relayer.
 
-</Info>
+</Note>
 
 ## Requirements
 
@@ -25,12 +25,12 @@ title: "Run a Relayer"
 
 ## Guide
 
-<Info>
+<Note>
 
 - The local agent setup shows how you can run a Relayer on your _local machine_, which is **only for testing and development purposes**.
 - We strongly encourage you to follow the [local agents guide](/guides/chains/deploy-hyperlane-with-local-agents) to understand how to configure and run the Relayer locally.
 
-</Info>
+</Note>
 
 ### Keys
 
@@ -97,13 +97,13 @@ Like the local setup, there are a few base arguments you should provide when con
 | `--db`                          | The path to where the Relayer should write persistent data to disk. Ensure this path to be persistent when using cloud setups. When using Docker, make sure to mount the persistent path/volume into the container. See [config-reference](/operate/config/config-reference#db) for more info.                                                            |
 | `--allowLocalCheckpointSyncers` | If `true`, this will allow the Relayer to look for Validator signatures on the Relayer's local filesystem. In a production environment, this should be `false`. If you're running a Validator on the same machine by following the Validator local setup instructions, set this to `true` so that your Relayer can access the local Validator signatures. |
 
-<Info>
-
-Your Relayer takes both command line arguments and environment variables as configuration.
-
-Take a look at the [agent configuration](/operate/config/agent-config) page and the [configuration reference](/operate/config/config-reference) for a full list of configuration possibilities.
-
-</Info>
+<Note>
+  Your Relayer takes both command line arguments and environment variables as
+  configuration. Take a look at the [agent
+  configuration](/operate/config/agent-config) page and the [configuration
+  reference](/operate/config/config-reference) for a full list of configuration
+  possibilities.
+</Note>
 
 You can also provide the path to additional configuration files as a comma separated list with the [`CONFIG_FILES` environment variable](/operate/config/config-reference#config_files). If you choose to run in Docker, see the docker section of [agent configuration](/operate/config/agent-config) for tips on mounting your config files into your Docker container.
 
@@ -209,7 +209,7 @@ For a refresher, check out the [Agent Keys](/operate/key-management/set-up-agent
       --defaultSigner.region us-east-1 \
     ```
 
-    <Info>
+    <Note>
       If you're running Validators with a local setup on the same machine and running a local Relayer to access these Validator signatures, be sure to [mount](https://docs.docker.com/storage/bind-mounts/) your local Validator's signature directory into your Relayer at the same path that you used when [announcing your Validator](/operate/validators/run-validators#announcing-your-validator)
 
       For example, if your local Validator is writing signatures to `/tmp/hyperlane-validator-signatures-ethereum`, you should mount a directory for the Docker container:
@@ -228,7 +228,7 @@ For a refresher, check out the [Agent Keys](/operate/key-management/set-up-agent
         --allowLocalCheckpointSyncers true \
         --defaultSigner.key <your_relayer_key> \
       ```
-    </Info>
+    </Note>
 
   </Tab>
 

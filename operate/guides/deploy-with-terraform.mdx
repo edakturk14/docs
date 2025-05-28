@@ -24,6 +24,44 @@ The provided terraform has a few key parts:
 
 The diagram below shows how it fits together.
 
+```mermaid
+graph LR
+    subgraph VPC_Network ["VPC Network"]
+        Subnet -- Protected by --> SG[AWS Security Group]
+
+        subgraph SG ["AWS Security Group"]
+            NATG[AWS NAT Gateway]
+            IGW[AWS Internet Gateway]
+        end
+    end
+
+    subgraph ECS_Validator ["Validator Module"]
+        ECSTask[ECS Task: Validator] -- Executes in --> Subnet
+    end
+
+    subgraph S3_Subgraph ["S3 Module"]
+        S3Bucket[AWS S3 Bucket] -- Accessed by --> ECSTask
+        ECSTask -- Writes to --> S3Bucket[Validator Signatures]
+    end
+
+    subgraph EFS_Subgraph ["EFS Module"]
+        EFS[AWS EFS] -- Mounted on --> ECSTask
+    end
+
+    subgraph IAM_KMS ["IAM / KMS Module"]
+        IAMUser[Validator IAM User]
+        KMSKey[KMS Key]
+    end
+
+    Internet -- Accessing Metrics --> IGW
+    NATG -- RPC Calls --> Internet
+
+    %% Additional Interconnections
+    ECSTask -- Signs with --> KMSKey
+    ECSTask -- Perms from --> IAMUser
+
+```
+
 ## Usage
 
 As a prerequisite, you need to have Terraform installed and the AWS CLI configured with your credentials.
@@ -89,7 +127,7 @@ This module also:
 
 The root level configuration sets up a VPC, subnets, internet gateway, NAT gateway, route tables, and security groups for network infrastructure. It also provides example usage of the `validator` module.
 
-```terraform
+```hcl
 module "your_validator_name" {
   source = "./modules/validator"
 

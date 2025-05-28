@@ -2,7 +2,7 @@
 title: "Quickstart with Docker Compose and AWS"
 ---
 
-Using Docker Compose provides a structured way to manage validator deployments while maintaining the flexibility of raw Docker. You can find the full specification of the format in the .
+Using Docker Compose provides a structured way to manage validator deployments while maintaining the flexibility of raw Docker. You can find the full specification of the format in the [Docker docs](https://docs.Docker.com/compose/compose-file/).
 
 ## 1. Setup validator key
 
@@ -80,7 +80,7 @@ Here is an example agent config.
 
 You should change the service name, AWS credentials for each chain.
 
-```
+```bash
 AWS_ACCESS_KEY_ID=<Your AWS access key ID>
 AWS_SECRET_ACCESS_KEY=<Your AWS secret access key>
 SERVICE_NAME=ethereum
@@ -158,9 +158,9 @@ docker logs -f optimism-validator
 docker logs -f base-validator
 ```
 
-<Check>
+<Tip>
   **Running Multiple Validators**: Running multiple validators improves
   reliability and ensures message validation continues even if one fails. Learn
   more about the setup and requirements
   [here](/docs/operate/validators/run-validators#running-multiple-validators).
-</Check>
+</Tip>
