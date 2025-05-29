@@ -26,12 +26,31 @@
                 "group": "Deployments",
                 "pages": [
                   {
-                    "group": "Contract Addresses",
-                    "pages": ["home/deployments/domains"]
+                    "group": "Mainnet",
+                    "pages": [
+                      "deployments/mainnet/mailbox",
+                      "deployments/mainnet/interchainAccountRouter",
+                      "deployments/mainnet/interchainGasPaymaster",
+                      "deployments/mainnet/validatorAnnounce",
+                      "deployments/mainnet/merkleTreeHook",
+                      "deployments/mainnet/proxyAdmin",
+                      "deployments/mainnet/storageGasOracle",
+                      "deployments/mainnet/testRecipient"
+                    ]
                   },
-                  "home/deployments/default-ism-validators",
-                  "home/deployments/domains",
-                  "home/deployments/registries"
+                  {
+                    "group": "Testnet",
+                    "pages": [
+                      "deployments/testnet/mailbox",
+                      "deployments/testnet/interchainAccountRouter",
+                      "deployments/testnet/interchainGasPaymaster",
+                      "deployments/testnet/validatorAnnounce",
+                      "deployments/testnet/merkleTreeHook",
+                      "deployments/testnet/proxyAdmin",
+                      "deployments/testnet/storageGasOracle",
+                      "deployments/testnet/testRecipient"
+                    ]
+                  }
                 ]
               }
             ]
