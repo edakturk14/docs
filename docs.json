@@ -26,31 +26,54 @@
                 "group": "Deployments",
                 "pages": [
                   {
-                    "group": "Mainnet",
+                    "group": "Contract Addresses",
                     "pages": [
-                      "deployments/mainnet/mailbox",
-                      "deployments/mainnet/interchainAccountRouter",
-                      "deployments/mainnet/interchainGasPaymaster",
-                      "deployments/mainnet/validatorAnnounce",
-                      "deployments/mainnet/merkleTreeHook",
-                      "deployments/mainnet/proxyAdmin",
-                      "deployments/mainnet/storageGasOracle",
-                      "deployments/mainnet/testRecipient"
+                      {
+                        "group": "Mainnet",
+                        "pages": [
+                          "reference/deployments/mainnet/mailbox",
+                          "reference/deployments/mainnet/interchainGasPaymaster",
+                          "reference/deployments/mainnet/storageGasOracle",
+                          "reference/deployments/mainnet/merkleTreeHook",
+                          "reference/deployments/mainnet/validatorAnnounce",
+                          "reference/deployments/mainnet/proxyAdmin",
+                          "reference/deployments/mainnet/testRecipient",
+                          "reference/deployments/mainnet/interchainAccountRouter"
+                        ]
+                      },
+                      {
+                        "group": "Testnet",
+                        "pages": [
+                          "reference/deployments/testnet/mailbox",
+                          "reference/deployments/testnet/interchainGasPaymaster",
+                          "reference/deployments/testnet/storageGasOracle",
+                          "reference/deployments/testnet/merkleTreeHook",
+                          "reference/deployments/testnet/validatorAnnounce",
+                          "reference/deployments/testnet/proxyAdmin",
+                          "reference/deployments/testnet/testRecipient",
+                          "reference/deployments/testnet/interchainAccountRouter"
+                        ]
+                      }
                     ]
                   },
                   {
-                    "group": "Testnet",
+                    "group": "Default ISM Validators",
                     "pages": [
-                      "deployments/testnet/mailbox",
-                      "deployments/testnet/interchainAccountRouter",
-                      "deployments/testnet/interchainGasPaymaster",
-                      "deployments/testnet/validatorAnnounce",
-                      "deployments/testnet/merkleTreeHook",
-                      "deployments/testnet/proxyAdmin",
-                      "deployments/testnet/storageGasOracle",
-                      "deployments/testnet/testRecipient"
+                      {
+                        "group": "Mainnet",
+                        "pages": [
+                          "reference/validators/mainnet/default-ism-validators"
+                        ]
+                      },
+                      {
+                        "group": "Testnet",
+                        "pages": [
+                          "reference/validators/testnet/default-ism-validators"
+                        ]
+                      }
                     ]
-                  }
+                  },
+                  "reference/registries"
                 ]
               }
             ]
@@ -183,7 +206,7 @@
                         "group": "Multisig ISM",
                         "pages": [
                           "learn/protocol/ISM/standard-ISMs/multisig-ISM",
-                          "learn/protocol/ISM/standard-ISMs/multisig-ism-latencies"
+                          "reference/validators/latencies"
                         ]
                       },
                       "learn/protocol/ISM/standard-ISMs/routing-ISM",
