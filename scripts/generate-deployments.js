@@ -44,9 +44,7 @@ function generateTableRows(chains, contractKey) {
       const chainId = chain.chainId ?? "N/A";
       const explorerUrl = chain.blockExplorers?.[0]?.url ?? "";
       const explorer = explorerUrl
-        ? `[${
-            new URL(explorerUrl).hostname
-          }](${explorerUrl}/address/${address})`
+        ? `[${new URL(explorerUrl).hostname}](${explorerUrl})`
         : "N/A";
 
       return `| ${displayName} | ${domainId} | ${chainId} | \`${address}\` | ${explorer} |`;
