@@ -9,7 +9,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Output folder
-const outputBase = path.join(__dirname, "deployments");
+const outputBase = path.join(__dirname, "../reference/deployments");
 
 // Define contract types to generate tables for
 const CONTRACT_KEYS = [

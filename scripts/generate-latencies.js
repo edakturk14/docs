@@ -9,7 +9,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Output folder
-const latenciesBase = path.join(__dirname, "validators");
+const latenciesBase = path.join(__dirname, "../reference/validators");
 
 // Utility
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);

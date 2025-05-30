@@ -10,7 +10,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Output folders
-const validatorsBase = path.join(__dirname, "validators");
+const validatorsBase = path.join(__dirname, "../reference/validators");
 const mainnetOutput = path.join(validatorsBase, "mainnet");
 const testnetOutput = path.join(validatorsBase, "testnet");
 

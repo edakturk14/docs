@@ -597,9 +597,9 @@
     tslib "^2.6.2"
 
 "@babel/runtime@^7.25.0", "@babel/runtime@^7.5.5":
-  version "7.27.3"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.27.3.tgz#10491113799fb8d77e1d9273384d5d68deeea8f6"
-  integrity sha512-7EYtGezsdiDMyY80+65EzwiGmcJqpmcZCojSXaRgdrBaGtWTgDZKq69cPIVped6MkIM78cTQ2GOiEYjwOlG4xw==
+  version "7.27.4"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.27.4.tgz#a91ec580e6c00c67118127777c316dfd5a5a6abf"
+  integrity sha512-t3yaEOuGu9NlIZ+hIeGbBjFtZT7j2cb2tg0fuaJKeGotchRjjLfrBA9Kwf8quhpP1EUuxModQg04q/mBwyg8uA==
 
 "@balena/dockerignore@^1.0.2":
   version "1.0.2"
@@ -1779,15 +1779,15 @@
     protobufjs "^7.2.5"
     yargs "^17.7.2"
 
-"@hyperlane-xyz/core@7.1.8":
-  version "7.1.8"
-  resolved "https://registry.yarnpkg.com/@hyperlane-xyz/core/-/core-7.1.8.tgz#17f55277471c40148fcad6155165f1a7cf01826a"
-  integrity sha512-ilU9/uw0Tym/nV4DZ7+o7EpC6m0le8S4uhem87C1UOfWpVUyadPtwXYnGUi9ux79omhxXuLrwmTD+R/AaqFdSw==
+"@hyperlane-xyz/core@7.1.9":
+  version "7.1.9"
+  resolved "https://registry.yarnpkg.com/@hyperlane-xyz/core/-/core-7.1.9.tgz#afdfeff9d6ebb00bca6b67a59e7854446da85e0e"
+  integrity sha512-cOIQNtBI0pY/Jcq1a89wLkk8MSAAjs2kxoh6STbBrej0V4ZdokLOD093TLayUg8SiSWEwA/RKKserjePRNYYdQ==
   dependencies:
     "@arbitrum/nitro-contracts" "^1.2.1"
     "@chainlink/contracts-ccip" "^1.5.0"
     "@eth-optimism/contracts" "^0.6.0"
-    "@hyperlane-xyz/utils" "13.1.1"
+    "@hyperlane-xyz/utils" "13.2.0"
     "@layerzerolabs/lz-evm-oapp-v2" "2.0.2"
     "@matterlabs/hardhat-zksync-solc" "1.2.5"
     "@matterlabs/hardhat-zksync-verify" "1.7.1"
@@ -1795,18 +1795,18 @@
     "@openzeppelin/contracts-upgradeable" "^4.9.3"
     fx-portal "^1.0.3"
 
-"@hyperlane-xyz/cosmos-sdk@13.1.1":
-  version "13.1.1"
-  resolved "https://registry.yarnpkg.com/@hyperlane-xyz/cosmos-sdk/-/cosmos-sdk-13.1.1.tgz#8c57bc7e33885544c9daffa1a296f5b30eabaf14"
-  integrity sha512-bI4WMNYouEnWYbshJExMjSObc9szntdUzuyatX2gK9tsyGauH/pEscZRxt85HzS2ZpFrTRhMjyXuakYv34/f9Q==
+"@hyperlane-xyz/cosmos-sdk@13.2.0":
+  version "13.2.0"
+  resolved "https://registry.yarnpkg.com/@hyperlane-xyz/cosmos-sdk/-/cosmos-sdk-13.2.0.tgz#0131a7281245dd50be1376307c787af8e487bc04"
+  integrity sha512-KXboX0mlzx/WlqRwNQDOypz2dCxdCMB6EUNj2Sm2aKOPCYaUI49sVRU3JOFgKGDCkmsDDchkPj83jy3sNBVUzA==
   dependencies:
     "@cosmjs/stargate" "^0.32.4"
-    "@hyperlane-xyz/cosmos-types" "13.1.1"
+    "@hyperlane-xyz/cosmos-types" "13.2.0"
 
-"@hyperlane-xyz/cosmos-types@13.1.1":
-  version "13.1.1"
-  resolved "https://registry.yarnpkg.com/@hyperlane-xyz/cosmos-types/-/cosmos-types-13.1.1.tgz#8a5e37e51ff274f586ebdd7aaac0923889e7bcd5"
-  integrity sha512-pugOVyY2hJv0Um82f9XDVSqzFyiA8ya6En5x2pvpTCHXyqGR0zPOm2iar2rEiMjrO4teTu89bCm8QHBEvwNexA==
+"@hyperlane-xyz/cosmos-types@13.2.0":
+  version "13.2.0"
+  resolved "https://registry.yarnpkg.com/@hyperlane-xyz/cosmos-types/-/cosmos-types-13.2.0.tgz#7d0e73f5e773d0a86ad5be01b2eb246da6440d53"
+  integrity sha512-xWrQ5ldN1l6z45ZU95x54/HhlJFnOKXNCL0SP/1v2FaoQenyeIeY1KGpS5wfQkrhSWs0DFgt/+xvRLhYj3nY3Q==
   dependencies:
     long "^5.2.4"
     protobufjs "^7.4.0"
@@ -1821,19 +1821,19 @@
     zod "^3.21.2"
 
 "@hyperlane-xyz/sdk@latest":
-  version "13.1.1"
-  resolved "https://registry.yarnpkg.com/@hyperlane-xyz/sdk/-/sdk-13.1.1.tgz#ae7dd6c21ce1cea7253aae06e6b18293cd539938"
-  integrity sha512-RWzRxaCtWK697nZPC4Pys8rrtRsYl4vrYqhB8AIaqsa9oXAe+PfxXLea7R/Asl5korvTWAagPScvMqFGKJ3hTw==
+  version "13.2.0"
+  resolved "https://registry.yarnpkg.com/@hyperlane-xyz/sdk/-/sdk-13.2.0.tgz#f339eef390c7d1d525a6a136613b3905bb74267a"
+  integrity sha512-eUfSjpHtZH4Hm6oZORmsQ86RAKoSdaRRAoy6unv0lGFxb2IVl0PI8MfiAFU2ix6NfAzj9TnBRpT/wzJ6/ikRBQ==
   dependencies:
     "@arbitrum/sdk" "^4.0.0"
     "@aws-sdk/client-s3" "^3.577.0"
     "@chain-registry/types" "^0.50.122"
     "@cosmjs/cosmwasm-stargate" "^0.32.4"
     "@cosmjs/stargate" "^0.32.4"
-    "@hyperlane-xyz/core" "7.1.8"
-    "@hyperlane-xyz/cosmos-sdk" "13.1.1"
-    "@hyperlane-xyz/starknet-core" "13.1.1"
-    "@hyperlane-xyz/utils" "13.1.1"
+    "@hyperlane-xyz/core" "7.1.9"
+    "@hyperlane-xyz/cosmos-sdk" "13.2.0"
+    "@hyperlane-xyz/starknet-core" "13.2.0"
+    "@hyperlane-xyz/utils" "13.2.0"
     "@safe-global/api-kit" "1.3.0"
     "@safe-global/protocol-kit" "1.3.0"
     "@safe-global/safe-deployments" "1.37.23"
@@ -1849,17 +1849,17 @@
     zksync-ethers "^5.10.0"
     zod "^3.21.2"
 
-"@hyperlane-xyz/starknet-core@13.1.1":
-  version "13.1.1"
-  resolved "https://registry.yarnpkg.com/@hyperlane-xyz/starknet-core/-/starknet-core-13.1.1.tgz#f61fdf66b20ed92854afb9a3b2952734640cada9"
-  integrity sha512-AOCs+xvP1GVxz9IzXzTxGyYc/1BczepnbfbiayS2X9jGjP+momS23s2P7Jjydqj2lDCSAlRIe6IMFMshnD8FVQ==
+"@hyperlane-xyz/starknet-core@13.2.0":
+  version "13.2.0"
+  resolved "https://registry.yarnpkg.com/@hyperlane-xyz/starknet-core/-/starknet-core-13.2.0.tgz#9a61d938881b7735fe64d26f0d45af307493000e"
+  integrity sha512-6WHhdU1kh+dnYSS99O4BjF6virJxU+7vjWnUltzoU2x1jRfD9Wnu91LvXOx4LZxALOBpDlxRdgO0k7nZAbQ9Cg==
   dependencies:
     starknet "^6.24.1"
 
-"@hyperlane-xyz/utils@13.1.1":
-  version "13.1.1"
-  resolved "https://registry.yarnpkg.com/@hyperlane-xyz/utils/-/utils-13.1.1.tgz#62c5d61810e445c00a5f0a3a02fa54d346fafb0e"
-  integrity sha512-h5v+rTQzXkCJ1I/zYzaZf6xBjBZzdzBDgWKaxb1BdSp/p5n+lp/P5t1DQQdWS7+sn4ieC/NUKyMy57jVHB67DA==
+"@hyperlane-xyz/utils@13.2.0":
+  version "13.2.0"
+  resolved "https://registry.yarnpkg.com/@hyperlane-xyz/utils/-/utils-13.2.0.tgz#eeb6ca17d5134d8bf67a82436e232693951a538f"
+  integrity sha512-u96SPMnTZQbd3dBKhTiY/eIbxbaz1+IEdoMykZIKoq5R+eRKdEFUlswWe2v6YDSD80EXu4WMSnXRmDXej7VdVg==
   dependencies:
     "@cosmjs/encoding" "^0.32.4"
     "@solana/web3.js" "^1.95.4"
@@ -3431,9 +3431,9 @@
     "@types/node" "*"
 
 "@types/node@*", "@types/node@>=13.7.0":
-  version "22.15.27"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.15.27.tgz#b99cd64129c4c85a69edca903af9b3aa72c3b4f7"
-  integrity sha512-5fF+eu5mwihV2BeVtX5vijhdaZOfkQTATrePEaXTcKqI16LhJ7gi2/Vhd9OZM0UojcdmiOCVg5rrax+i1MdoQQ==
+  version "22.15.28"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.15.28.tgz#97d851fda6db030612fa0b472577bbc0fe0bc668"
+  integrity sha512-I0okKVDmyKR281I0UIFV7EWAWRnR0gkuSKob5wVcByyyhr7Px/slhkQapcYX4u00ekzNWaS1gznKZnuzxwo4pw==
   dependencies:
     undici-types "~6.21.0"
 
