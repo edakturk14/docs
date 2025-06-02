@@ -21,7 +21,7 @@
             "group": "Overview",
             "pages": [
               "index",
-              "home/intro",
+              "docs/intro",
               {
                 "group": "Deployments",
                 "pages": [
@@ -31,27 +31,27 @@
                       {
                         "group": "Mainnet",
                         "pages": [
-                          "reference/deployments/mainnet/mailbox",
-                          "reference/deployments/mainnet/interchainGasPaymaster",
-                          "reference/deployments/mainnet/storageGasOracle",
-                          "reference/deployments/mainnet/merkleTreeHook",
-                          "reference/deployments/mainnet/validatorAnnounce",
-                          "reference/deployments/mainnet/proxyAdmin",
-                          "reference/deployments/mainnet/testRecipient",
-                          "reference/deployments/mainnet/interchainAccountRouter"
+                          "docs/reference/addresses/deployments/mainnet/mailbox",
+                          "docs/reference/addresses/deployments/mainnet/interchainGasPaymaster",
+                          "docs/reference/addresses/deployments/mainnet/storageGasOracle",
+                          "docs/reference/addresses/deployments/mainnet/merkleTreeHook",
+                          "docs/reference/addresses/deployments/mainnet/validatorAnnounce",
+                          "docs/reference/addresses/deployments/mainnet/proxyAdmin",
+                          "docs/reference/addresses/deployments/mainnet/testRecipient",
+                          "docs/reference/addresses/deployments/mainnet/interchainAccountRouter"
                         ]
                       },
                       {
                         "group": "Testnet",
                         "pages": [
-                          "reference/deployments/testnet/mailbox",
-                          "reference/deployments/testnet/interchainGasPaymaster",
-                          "reference/deployments/testnet/storageGasOracle",
-                          "reference/deployments/testnet/merkleTreeHook",
-                          "reference/deployments/testnet/validatorAnnounce",
-                          "reference/deployments/testnet/proxyAdmin",
-                          "reference/deployments/testnet/testRecipient",
-                          "reference/deployments/testnet/interchainAccountRouter"
+                          "docs/reference/addresses/deployments/testnet/mailbox",
+                          "docs/reference/addresses/deployments/testnet/interchainGasPaymaster",
+                          "docs/reference/addresses/deployments/testnet/storageGasOracle",
+                          "docs/reference/addresses/deployments/testnet/merkleTreeHook",
+                          "docs/reference/addresses/deployments/testnet/validatorAnnounce",
+                          "docs/reference/addresses/deployments/testnet/proxyAdmin",
+                          "docs/reference/addresses/deployments/testnet/testRecipient",
+                          "docs/reference/addresses/deployments/testnet/interchainAccountRouter"
                         ]
                       }
                     ]
@@ -62,18 +62,19 @@
                       {
                         "group": "Mainnet",
                         "pages": [
-                          "reference/validators/mainnet/default-ism-validators"
+                          "docs/reference/addresses/validators/mainnet/default-ism-validators"
                         ]
                       },
                       {
                         "group": "Testnet",
                         "pages": [
-                          "reference/validators/testnet/default-ism-validators"
+                          "docs/reference/addresses/validators/testnet/default-ism-validators"
                         ]
                       }
                     ]
                   },
-                  "reference/registries"
+                  "docs/reference/domains",
+                  "docs/reference/registries"
                 ]
               }
             ]
@@ -81,8 +82,8 @@
           {
             "group": "Quickstart",
             "pages": [
-              "guides/quickstart/deploy-warp-route",
-              "guides/quickstart/local-testnet-setup"
+              "docs/guides/quickstart/deploy-warp-route",
+              "docs/guides/quickstart/local-testnet-setup"
             ]
           },
           {
@@ -91,13 +92,13 @@
               {
                 "group": "Warp Routes",
                 "pages": [
-                  "home/applications/warp-routes/overview",
-                  "home/applications/warp-routes/interface",
-                  "home/applications/warp-routes/types",
-                  "home/applications/warp-routes/example-usage"
+                  "docs/applications/warp-routes/overview",
+                  "docs/applications/warp-routes/interface",
+                  "docs/applications/warp-routes/types",
+                  "docs/applications/warp-routes/example-usage"
                 ]
               },
-              "home/applications/interchain-account"
+              "docs/applications/interchain-account"
             ]
           },
           {
@@ -145,14 +146,14 @@
           {
             "group": "Developer Tools",
             "pages": [
-              "home/developer-tools/cli",
+              "docs/reference/developer-tools/cli",
               {
                 "group": "Libaries",
-                "pages": ["home/explorer/overview"]
+                "pages": ["docs/reference/explorer/overview"]
               },
               {
                 "group": "Typescript SDK",
-                "pages": ["home/explorer/overview"]
+                "pages": ["docs/reference/explorer/overview"]
               }
             ]
           },
@@ -162,14 +163,14 @@
               {
                 "group": "Hyperlane Explorer",
                 "pages": [
-                  "home/explorer/overview",
-                  "home/explorer/configuring-pi-chains",
-                  "home/explorer/graphql-api"
+                  "docs/reference/explorer/overview",
+                  "docs/reference/explorer/configuring-pi-chains",
+                  "docs/reference/explorer/graphql-api"
                 ]
               },
               {
                 "group": "Developer Tips",
-                "pages": ["home/explorer/overview"]
+                "pages": ["docs/reference/explorer/overview"]
               }
             ]
           }
@@ -180,45 +181,45 @@
         "groups": [
           {
             "group": "Introduction",
-            "pages": ["learn/protocol/protocol-overview"]
+            "pages": ["docs/protocol/protocol-overview"]
           },
           {
             "group": "HYPER and Protocol Economics",
-            "pages": ["learn/protocol-economics/intro"]
+            "pages": ["docs/protocol-economics/intro"]
           },
           {
             "group": "Protocol",
             "pages": [
-              "learn/protocol/core/mailbox",
-              "learn/protocol/core/fees",
-              "learn/protocol/core/interchain-gas-payment",
-              "learn/protocol/core/post-dispatch-hooks-overview",
+              "docs/protocol/core/mailbox",
+              "docs/protocol/core/fees",
+              "docs/protocol/core/interchain-gas-payment",
+              "docs/protocol/core/post-dispatch-hooks-overview",
               {
                 "group": "Modular Security",
                 "pages": [
-                  "learn/protocol/ISM/modular-security",
-                  "learn/protocol/ISM/sequence-diagram",
-                  "learn/protocol/ISM/custom-ISM",
+                  "docs/protocol/ISM/modular-security",
+                  "docs/protocol/ISM/sequence-diagram",
+                  "docs/protocol/ISM/custom-ISM",
                   {
                     "group": "Standard ISMs",
                     "pages": [
                       {
                         "group": "Multisig ISM",
                         "pages": [
-                          "learn/protocol/ISM/standard-ISMs/multisig-ISM",
-                          "reference/validators/latencies"
+                          "docs/protocol/ISM/standard-ISMs/multisig-ISM",
+                          "docs/reference/addresses/validators/latencies"
                         ]
                       },
-                      "learn/protocol/ISM/standard-ISMs/routing-ISM",
-                      "learn/protocol/ISM/standard-ISMs/aggregation-ISM",
-                      "learn/protocol/ISM/standard-ISMs/ccip-read-ISM"
+                      "docs/protocol/ISM/standard-ISMs/routing-ISM",
+                      "docs/protocol/ISM/standard-ISMs/aggregation-ISM",
+                      "docs/protocol/ISM/standard-ISMs/ccip-read-ISM"
                     ]
                   },
                   {
                     "group": "Economic Security",
                     "pages": [
-                      "learn/protocol/ISM/economic-security/overview",
-                      "learn/protocol/ISM/economic-security/hyperlane-avs"
+                      "docs/protocol/ISM/economic-security/overview",
+                      "docs/protocol/ISM/economic-security/hyperlane-avs"
                     ]
                   }
                 ]
@@ -226,9 +227,9 @@
               {
                 "group": "Hyperlane Agents",
                 "pages": [
-                  "learn/protocol/agents/overview",
-                  "learn/protocol/agents/validators",
-                  "learn/protocol/agents/relayer"
+                  "docs/protocol/agents/overview",
+                  "docs/protocol/agents/validators",
+                  "docs/protocol/agents/relayer"
                 ]
               }
             ]
@@ -239,17 +240,17 @@
               {
                 "group": "Send & Receive",
                 "pages": [
-                  "learn/reference/messaging/send",
-                  "learn/reference/messaging/receive"
+                  "docs/reference/messaging/send",
+                  "docs/reference/messaging/receive"
                 ]
               },
               {
                 "group": "Hooks",
                 "pages": [
-                  "learn/reference/hooks/interchain-gas",
-                  "learn/reference/hooks/op-stack",
-                  "learn/reference/hooks/arbitrum-L2-to-L1",
-                  "learn/reference/hooks/polygon-pos"
+                  "docs/reference/hooks/interchain-gas",
+                  "docs/reference/hooks/op-stack",
+                  "docs/reference/hooks/arbitrum-L2-to-L1",
+                  "docs/reference/hooks/polygon-pos"
                 ]
               }
             ]
@@ -257,18 +258,18 @@
           {
             "group": "Alt-VM Implementations & Guides",
             "pages": [
-              "learn/alt-vm-implementations/overview",
-              "learn/alt-vm-implementations/implementation-guide",
-              "learn/alt-vm-implementations/cosmos-sdk"
+              "docs/alt-vm-implementations/overview",
+              "docs/alt-vm-implementations/implementation-guide",
+              "docs/alt-vm-implementations/cosmos-sdk"
             ]
           },
           {
             "group": "Resources",
             "pages": [
-              "learn/resources/message-debugging",
-              "learn/resources/glossary",
-              "learn/resources//faq",
-              "learn/resources/audits"
+              "docs/resources/message-debugging",
+              "docs/resources/glossary",
+              "docs/resources//faq",
+              "docs/resources/audits"
             ]
           }
         ]
@@ -278,41 +279,41 @@
         "groups": [
           {
             "group": "Introduction",
-            "pages": ["operate/overview-agents"]
+            "pages": ["docs/operate/overview-agents"]
           },
           {
             "group": "Key Management",
-            "pages": ["operate/key-management/set-up-agent-keys"]
+            "pages": ["docs/operate//set-up-agent-keys"]
           },
           {
             "group": "Validators",
             "pages": [
-              "operate/validators/run-validators",
-              "operate/validators/validator-signatures-aws",
-              "operate/validators/monitoring-alerting"
+              "docs/operate/validators/run-validators",
+              "docs/operate/validators/validator-signatures-aws",
+              "docs/operate/validators/monitoring-alerting"
             ]
           },
           {
             "group": "Relayer",
             "pages": [
-              "operate/relayer/run-relayer",
-              "operate/relayer/message-filtering",
-              "operate/relayer/monitoring-alerting"
+              "docs/operate/relayer/run-relayer",
+              "docs/operate/relayer/message-filtering",
+              "docs/operate/relayer/monitoring-alerting"
             ]
           },
           {
             "group": "Agent Config",
             "pages": [
-              "operate/config/agent-config",
-              "operate/config/config-reference"
+              "docs/operate/config/agent-config",
+              "docs/operate/config/config-reference"
             ]
           },
           {
             "group": "Guides",
             "pages": [
-              "operate/guides/docker-quickstart",
-              "operate/guides/deploy-with-terraform",
-              "operate/guides/avs-operator-guide"
+              "docs/operate/guides/docker-quickstart",
+              "docs/operate/guides/deploy-with-terraform",
+              "docs/operate/guides/avs-operator-guide"
             ]
           }
         ]
