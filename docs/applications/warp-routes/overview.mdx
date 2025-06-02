@@ -21,7 +21,7 @@ The deployer of a Warp Route can specify the ISMs that are used to verify interc
 <Note>
   Similarly, Warp frontends should manually curate their warp routes to avoid
   supporting insecure ones. See the [Warp UI deployment
-  docs](/docs/guides/deploy-warp-route-UI.mdx) details.
+  docs](/docs/guides/warp-routes/bridge-ui-guide.mdx) details.
 </Note>
 
 ## Warp Route Architecture
@@ -34,11 +34,11 @@ For example:
 2. **Native → Synthetic**: Native gas tokens (e.g., ETH) are locked on the origin chain, a message is sent, and synthetic tokens are minted on the destination chain.
 3. **Native → Collateral**: Native tokens are locked on the origin chain, a message is sent, and collateral tokens are released on the destination chain.
 
-Each Warp Route requires a contract deployed on every chain its on that acts as an entry/exists point. These contracts use the [Mailbox](../mailbox.mdx) to send interchain messages to one another.
+Each Warp Route requires a contract deployed on every chain its on that acts as an entry/exists point. These contracts use the [Mailbox](/docs/protocol/core/mailbox) to send interchain messages to one another.
 
 ### Warp Route Types
 
-This table gives a high-level overview of Warp Route types. For detailed explanations, see: [Warp Route Types.](warp-routes-types.mdx)
+This table gives a high-level overview of Warp Route types. For detailed explanations, see: [Warp Route Types.](./types)
 
 | **Warp Route Type**          | **Description**                                                                                  |
 | ---------------------------- | ------------------------------------------------------------------------------------------------ |
@@ -56,7 +56,7 @@ Let’s walk through a **Collateral** to **Synthetic** Warp Route using the lock
 2. A message is sent through Hyperlane’s Mailbox and relayed to the synthetic chain (e.g., Base).
 3. On the destination chain, the Warp Route contract mints wrapped tokens to the user.
 
-In the diagram below, the ISM is a [Multisig ISM](/docs/protocol/ISM/multisig-ISM), which uses a set of validators to approve messages. (Note: Not all ISMs require validators, this depends on the chosen security model.)
+In the diagram below, the ISM is a [Multisig ISM](/docs/protocol/ISM/standard-ISMs/multisig-ISM), which uses a set of validators to approve messages. (Note: Not all ISMs require validators, this depends on the chosen security model.)
 
 Here’s a simplified view of the flow:
 
@@ -68,12 +68,12 @@ Warp Routes can be deployed between any set of chains that have Hyperlane deploy
 
 To deploy a Warp Route, head over to the following guides:
 
-- [EVM-based Warp Route](/docs/guides/deploy-warp-route)
-- [SVM-based Warp Route](/docs/guides/deploy-svm-warp-route)
-- [EVM-SVM Warp Route](/docs/guides/deploy-evm-svm-warp-route)
+- [EVM-based Warp Route](/docs/guides/quickstart/deploy-warp-route)
+- [SVM-based Warp Route](/docs/guides/warp-routes/svm/svm-warp-route-guide)
+- [EVM-SVM Warp Route](/docs/guides/warp-routes/evm-svm-warp-route-guide)
 
 <Tip>
   If you would like to create a Warp Route that includes a chain that Hyperlane
   is not currently deployed on, feel free to [deploy
-  Hyperlane](../../deploy-hyperlane.mdx) yourself!
+  Hyperlane](/docs/guides/chains/deploy-hyperlane.mdx) yourself!
 </Tip>

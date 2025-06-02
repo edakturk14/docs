@@ -29,7 +29,7 @@ As you follow this guide, you can run a Hyperlane validator on any of the existi
 
 - **RPC Node**
 
-  - Validators make simple view calls to read merkle roots from the [Mailbox](/docs/protocol/mailbox) contract on the chain they are validating for. You must use your own RPC urls not any public ones.
+  - Validators make simple view calls to read merkle roots from the [Mailbox](/docs/protocol/core/mailbox) contract on the chain they are validating for. You must use your own RPC urls not any public ones.
   - Validators should configure multiple RPC URLs for redundancy and reliability. Different chains have different configurations—check the Configuration section for details.
 
 <Warning>
@@ -67,22 +67,22 @@ Hyperlane Validators and Relayers can use **multiple RPC URLs** to improve relia
 
 EVM-based chains support configuring multiple RPC endpoints for redundancy and can specify how they are used.
 
-- **Configure multiple RPCs:** Use [`customRpcUrls`](/docs/operate/config-reference#chainschain_namecustomrpcurls).
+- **Configure multiple RPCs:** Use [`customRpcUrls`](/docs/operate/config/config-reference#chainschain_namecustomrpcurls).
 
-- **RPC Selection Mode ([`rpcConsensusType`](/docs/operate/config-reference#chainschain_namerpcconsensustype))**:
+- **RPC Selection Mode ([`rpcConsensusType`](/docs/operate/config/config-reference#chainschain_namerpcconsensustype))**:
 
   - **Fallback**: The agent tries the first URL and switches to the next if needed.
   - **Quorum**: Requires a majority of the URLs to agree with the exception of submitting transactions; it will automatically coordinate the "latest" block if not specified to reduce sync errors.
 
 Cosmos-based chains require both **RPC and gRPC endpoints** for proper operation.
 
-- **Configure multiple RPCs:** Use [`customRpcUrls`](/docs/operate/config-reference#chainschain_namecustomrpcurls).
-- **Configure gRPC endpoints:** Use [`customGrpcUrls`](/docs/operate/config-reference#chainschain_namecustomgrpcurls).
+- **Configure multiple RPCs:** Use [`customRpcUrls`](/docs/operate/config/config-reference#chainschain_namecustomrpcurls).
+- **Configure gRPC endpoints:** Use [`customGrpcUrls`](/docs/operate/config/config-reference#chainschain_namecustomgrpcurls).
 - **Fallback Mechanism:** Cosmos agents always use **fallback mode**.
 
 SVM-based chains support configuring multiple RPC endpoints, but **only a single RPC is used**.
 
-- **Configure RPCs:** Use [`customRpcUrls`](/docs/operate/config-reference#chainschain_namecustomrpcurls).
+- **Configure RPCs:** Use [`customRpcUrls`](/docs/operate/config/config-reference#chainschain_namecustomrpcurls).
 
 <Warning>
   For **SVM chains**, only a **single RPC URL** is used. here is no fallback or
@@ -104,11 +104,11 @@ Like the local setup, there are a few base arguments you should provide when con
   Your Validator takes both command line arguments and environment variables as
   configuration. Take a look at the [agent
   configuration](/docs/operate/agent-config) page and the [configuration
-  reference](/docs/operate/config-reference) for a full list of configuration
-  possibilities.
+  reference](/docs/operate/config/config-reference) for a full list of
+  configuration possibilities.
 </Info>
 
-You can also provide the path to additional configuration files as a comma separated list with the [`CONFIG_FILES` environment variable](/docs/operate/config-reference#config_files). If you choose to run in Docker, see the docker section of [agent configuration](/docs/operate/agent-config) for tips on mounting your config files into your Docker container.
+You can also provide the path to additional configuration files as a comma separated list with the [`CONFIG_FILES` environment variable](/docs/operate/config/config-reference#config_files). If you choose to run in Docker, see the docker section of [agent configuration](/docs/operate/agent-config) for tips on mounting your config files into your Docker container.
 
 ### Setup-specific configuration
 

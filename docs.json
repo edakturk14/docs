@@ -166,12 +166,21 @@
             "pages": [
               "docs/reference/developer-tools/cli",
               {
-                "group": "Libaries",
-                "pages": ["docs/reference/explorer/overview"]
+                "group": "Libraries",
+                "pages": [
+                  "docs/reference/developer-tools/libraries/mailbox-client",
+                  "docs/reference/developer-tools/libraries/router",
+                  "docs/reference/developer-tools/libraries/typecasts",
+                  "docs/reference/developer-tools/libraries/message",
+                  "docs/reference/developer-tools/libraries/hookmetadata"
+                ]
               },
               {
                 "group": "Typescript SDK",
-                "pages": ["docs/reference/explorer/overview"]
+                "pages": [
+                  "docs/reference/developer-tools/typescript-sdk/overview",
+                  "docs/reference/developer-tools/typescript-sdk/transfer-fee-calculation"
+                ]
               }
             ]
           },
@@ -183,7 +192,8 @@
                 "pages": [
                   "docs/reference/explorer/overview",
                   "docs/reference/explorer/configuring-pi-chains",
-                  "docs/reference/explorer/graphql-api"
+                  "docs/reference/explorer/graphql-api",
+                  "docs/reference/explorer/explorer-debugging"
                 ]
               },
               {
@@ -306,7 +316,7 @@
           {
             "group": "Validators",
             "pages": [
-              "docs/operate/validators/run-validators",
+              "docs/docs/operate/validators/run-validators",
               "docs/operate/validators/validator-signatures-aws",
               "docs/operate/validators/monitoring-alerting"
             ]
@@ -314,7 +324,7 @@
           {
             "group": "Relayer",
             "pages": [
-              "docs/operate/relayer/run-relayer",
+              "docsdocs/operate/relayer/run-relayer",
               "docs/operate/relayer/message-filtering",
               "docs/operate/relayer/monitoring-alerting"
             ]

@@ -32,7 +32,7 @@ Deploy Hyperlane contracts to your chains.
 
 ## 3. Run a validator
 
-Validators provide the security for messages sent _from_ your chain to remote chains. They're only required when using a [Multisig ISM](/docs/protocol/ISM/multisig-ISM). Learn more about what validators do [here](/docs/protocol/agents/validators).
+Validators provide the security for messages sent _from_ your chain to remote chains. They're only required when using a [Multisig ISM](/docs/protocol/ISM/standard-ISMs/multisig-ISM). Learn more about what validators do [here](/docs/protocol/agents/validators).
 
 ### Setup directories
 
@@ -47,8 +47,8 @@ Next, create a local directory for your validator to write its signatures to. Re
 <Warning>
   The validator signatures path will be written on-chain as part of the
   [validator announcement
-  transaction](/docs/guides/implementation-guide#validator-announce). **Be
-  careful not to reveal any security-sensitive or personal information!**
+  transaction](/docs/alt-vm-implementations/implementation-guide#validator-announce).
+  **Be careful not to reveal any security-sensitive or personal information!**
 </Warning>
 
 ```bash
@@ -93,7 +93,7 @@ There are numerous parameters that validators can be configured with. For this g
   previous step will not be able to verify messages sent from your chain.
 </Info>
 
-To learn more about all the parameters you can change, read the [agent configuration reference](/docs/operate/config-reference).
+To learn more about all the parameters you can change, read the [agent configuration reference](/docs/operate/config/config-reference).
 
 <Tabs>
   <Tab title="Using Docker">
@@ -280,7 +280,7 @@ There are numerous parameters that relayers can be configured with. For this gui
   destination chain.
 </Tip>
 
-To learn more about all the parameters you can change, read the [agent configuration reference](/docs/operate/config-reference).
+To learn more about all the parameters you can change, read the [agent configuration reference](/docs/operate/config/config-reference).
 
 <Tabs>
   <Tab title="Using Docker">
@@ -407,4 +407,4 @@ Send test messages to verify your setup is working correctly.
 
 ## 6. (Optional) Deploy a Warp Route
 
-To connect tokens using your new Hyperlane deployment, see the [Warp Route deployment guide](/docs/guides/deploy-warp-route).
+To connect tokens using your new Hyperlane deployment, see the [Warp Route deployment guide](/docs/guides/quickstart/deploy-warp-route).

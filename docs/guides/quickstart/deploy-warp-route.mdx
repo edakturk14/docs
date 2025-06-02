@@ -4,8 +4,8 @@ title: "Bridge a Token"
 
 <Info>
   **This guide is for EVM-based chains.** For other environments, check out:
-- [SVM Warp Route Guide](/docs/guides/deploy-svm-warp-route)
-- [EVM ↔ SVM Warp Route Guide](/docs/guides/deploy-evm-svm-warp-route)
+- [SVM Warp Route Guide](/docs/guides/warp-routes/svm/svm-warp-route-guide)
+- [EVM ↔ SVM Warp Route Guide](/docs/guides/warp-routes/evm-svm-warp-route-guide)
 
 </Info>
 
@@ -13,7 +13,7 @@ This section provides a step-by-step walkthrough for creating an interchain toke
 
 ## Prerequisites
 
-- [Hyperlane CLI](/docs/reference/cli)
+- [Hyperlane CLI](/docs/reference/developer-tools/cli)
 - A private key for contract transaction signing
 
 ## 1. Configuration
@@ -61,7 +61,7 @@ Your config consists of a map of chain names to deployment configs. Each config 
 
 #### Optional fields[​](#optional-fields "Direct link to Optional fields")
 
-You may specify the following optional values in your config entries. If no values are provided, the deployer will attempt to pull these values from elsewhere. In the case of metadata (symbol, name decimals), it will query the contract. For addresses (mailbox, ISM) it will check the registry, either yours (if provided) or the [default](/docs/docs/reference/registries#default-registry).
+You may specify the following optional values in your config entries. If no values are provided, the deployer will attempt to pull these values from elsewhere. In the case of metadata (symbol, name decimals), it will query the contract. For addresses (mailbox, ISM) it will check the registry, either yours (if provided) or the [default](/docs/reference/registries#default-registry).
 
 - **symbol:** The token symbol
 - **name:** The token name
@@ -83,7 +83,7 @@ For a minimal Warp deployment config example using local anvil chains, see [`war
 
 ### Chain Configurations
 
-The deployment will require basic information about any chains it will be interacting with. If the target chains are not already in the [Hyperlane Registry](https://github.com/hyperlane-xyz/hyperlane-registry), you must specify chain metadata for them. See the [CLI reference](/docs/reference/cli) for details.
+The deployment will require basic information about any chains it will be interacting with. If the target chains are not already in the [Hyperlane Registry](https://github.com/hyperlane-xyz/hyperlane-registry), you must specify chain metadata for them. See the [CLI reference](/docs/reference/developer-tools/cli) for details.
 
 To see what chains are in the currently known, run the following command:
 
@@ -150,9 +150,9 @@ You can test in either direction between where you have the warp route set. Howe
 <Info>
   **Next Steps**
 
-- If you were following the [Deploy Hyperlane to a new chain](/docs/deploy-hyperlane#3-warp-route) guide and want to connect other chains or move to production with Abacus Works, continue with the [Submit to Registry](/docs/deploy-hyperlane#4-submit-to-registry) guide.
+- If you were following the [Deploy Hyperlane to a new chain](/docs/guides/chains/deploy-hyperlane#3-warp-route) guide and want to connect other chains or move to production with Abacus Works, continue with the [Submit to Registry](/docs/guides/chains/deploy-hyperlane#4-submit-to-registry) guide.
 
-- For interacting with Warp Routes via a UI, continue to the [Warp UI docs](/docs/guides/deploy-warp-route-UI).
+- For interacting with Warp Routes via a UI, continue to the [Warp UI docs](/docs/guides/warp-routes/bridge-ui-guide).
 
 </Info>
 

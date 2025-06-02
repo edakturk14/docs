@@ -32,8 +32,8 @@ For core chains supported by Hyperlane, you are able to use the defaults that ar
 <Check>
   * Use `InterchainAccountRouter` out of the box - ICA routers have already been
   deployed to core chains. Please refer to
-  [addresses](/docs/reference/contract-addresses#interchainaccountrouter). Try
-  using the `callRemote` method to do a call via your wallet's interchain
+  [addresses](/docs/reference/addresses/deployments/mainnet/interchainAccountRouter).
+  Try using the `callRemote` method to do a call via your wallet's interchain
   account.
 </Check>
 
@@ -65,7 +65,7 @@ const localChain = 'ethereum';const signer = <YOUR_SIGNER>;const localRouter: In
 
 ### Determine addresses[​](#determine-addresses "Direct link to Determine addresses")
 
-In some cases, you may need to compute the ICA address on a remote chain before making a call. For example, if your ICA needs funding before executing transactions, you can retrieve its address and transfer assets to it in advance. See the [Transfer and Call Pattern](/docs/guides/transfer-and-call) section for more information.
+In some cases, you may need to compute the ICA address on a remote chain before making a call. For example, if your ICA needs funding before executing transactions, you can retrieve its address and transfer assets to it in advance. See the [Transfer and Call Pattern](/docs/guides/warp-routes/evm/transfer-and-call-pattern) section for more information.
 
 ````
 The `getRemoteInterchainAccount` function can be used to get the address of an ICA given the destination chain and owner address.An example is included below of a contract precomputing its own Interchain Account address.```solidityaddress myInterchainAccount = IInterchainAccountRouter(...).getRemoteInterchainAccount(    destination,    address(this));
