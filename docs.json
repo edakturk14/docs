@@ -107,8 +107,8 @@
               {
                 "group": "Setup Hyperlane on your Chain",
                 "pages": [
-                  "guides/chains/deploy-hyperlane",
-                  "guides/chains/deploy-hyperlane-with-local-agents"
+                  "docs/guides/chains/deploy-hyperlane",
+                  "docs/guides/chains/deploy-hyperlane-with-local-agents"
                 ]
               },
               {
@@ -117,30 +117,48 @@
                   {
                     "group": "EVM Warp Routes",
                     "pages": [
-                      "guides/warp-routes/evm/deploy-yield-routes",
-                      "guides/warp-routes/evm/fast-native-transfer-via-gas-token",
-                      "guides/warp-routes/evm/extending-warp-routes",
-                      "guides/warp-routes/evm/xerc20-warp-route",
-                      "guides/warp-routes/evm/managing-warp-route-limits",
-                      "guides/warp-routes/evm/deploy-multi-collateral-warp-routes",
-                      "guides/warp-routes/evm/multi-collateral-warp-routes-rebalancing",
-                      "guides/warp-routes/evm/transfer-and-call-pattern"
+                      "docs/guides/warp-routes/evm/deploy-yield-routes",
+                      "docs/guides/warp-routes/evm/fast-native-transfer-via-gas-token",
+                      "docs/guides/warp-routes/evm/extending-warp-routes",
+                      "docs/guides/warp-routes/evm/xerc20-warp-route",
+                      "docs/guides/warp-routes/evm/managing-warp-route-limits",
+                      "docs/guides/warp-routes/evm/deploy-multi-collateral-warp-routes",
+                      "docs/guides/warp-routes/evm/multi-collateral-warp-routes-rebalancing",
+                      "docs/guides/warp-routes/evm/transfer-and-call-pattern"
                     ]
                   },
                   {
                     "group": "SVM Warp Routes",
-                    "pages": ["guides/warp-routes/svm/svm-warp-route-guide"]
+                    "pages": [
+                      "docs/guides/warp-routes/svm/svm-warp-route-guide"
+                    ]
                   },
-                  "guides/warp-routes/evm-svm-warp-route-guide",
-                  "guides/warp-routes/bridge-ui-guide"
+                  "docs/guides/warp-routes/evm-svm-warp-route-guide",
+                  "docs/guides/warp-routes/bridge-ui-guide"
                 ]
               },
               {
                 "group": "Go to Production",
-                "pages": ["guides/production"]
+                "pages": [
+                  "docs/guides/production/prod-overview",
+                  {
+                    "group": "Core Deployment",
+                    "pages": [
+                      "docs/guides/production/core-deployment/update-mailbox-default-ism",
+                      "docs/guides/production/core-deployment/transfer-mailbox-ownership"
+                    ]
+                  },
+                  {
+                    "group": "Warp Route Deployment",
+                    "pages": [
+                      "docs/guides/production/warp-route-deployment/remove-trusted-relayer",
+                      "docs/guides/production/warp-route-deployment/transfer-warp-route-ownership"
+                    ]
+                  }
+                ]
               },
-              "guides/create-custom-hook-and-ism",
-              "guides/deploy-hyperlane-troubleshooting"
+              "docs/guides/create-custom-hook-and-ism",
+              "docs/guides/deploy-hyperlane-troubleshooting"
             ]
           },
           {
