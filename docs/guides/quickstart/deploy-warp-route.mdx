@@ -23,7 +23,7 @@ This section provides a step-by-step walkthrough for creating an interchain toke
 To deploy the route, you will need a Warp Route deployment config file. A valid config will specify:
 
 - Which token, on which chain, is this Warp Route being created for?
-- _Optional:_ Hyperlane connection details, such as contract addresses for the [Mailbox](/docs/reference/messaging/messaging-interface), [Interchain Gas](/docs/reference/hooks/interchain-gas), and [Interchain Security Modules](/docs/reference/ISM/specify-your-ISM).
+- _Optional:_ Hyperlane connection details, such as contract addresses for the [Mailbox](/docs/reference/messaging/messaging-interface), [Interchain Gas](/docs/reference/hooks/interchain-gas), and [Interchain Security Modules](/docs/protocol/ISM/modular-security#core-concepts).
 - _Optional:_ Token standard, including ERC20 (fungible tokens), ERC721 (NFTs), and ERC4626 (yield-bearing tokens). Note ERC721 support is experimental and some Hyperlane tooling won't work for NFTs yet.
 
 The easiest way to create a Warp Route deployment config file is with the CLI's config command:
@@ -67,7 +67,7 @@ You may specify the following optional values in your config entries. If no valu
 - **name:** The token name
 - **decimals:** The number of decimal places for the token
 - **mailbox:** The address of the [mailbox](/docs/reference/messaging/messaging-interface) contract to use to send and receive messages
-- **interchainSecurityModule:** The address of an [interchain security modules](/docs/reference/ISM/specify-your-ISM) to verify interchain messages
+- **interchainSecurityModule:** The address of an [interchain security modules](/docs/protocol/ISM/modular-security#core-concepts) to verify interchain messages
 
 #### Example[​](#example "Direct link to Example")
 
@@ -158,6 +158,6 @@ You can test in either direction between where you have the warp route set. Howe
 
 ## Learn More
 
-- Check out the [Warp Route](/docs/reference/applications/warp-routes) reference page for more information on the interface and security implications of a Warp Route. The [interface](/docs/reference/applications/warp-routes#interface) section covers calling `transferRemote` to transfer tokens to a specified recipient on a destination chain. Note that you'll have to prompt for a token approval prior to calling `transferRemote`.
+- Check out the [Warp Route](docs/applications/warp-routes/overview) reference page for more information on the interface and security implications of a Warp Route. The [interface](docs/applications/warp-routes/overview#interface) section covers calling `transferRemote` to transfer tokens to a specified recipient on a destination chain. Note that you'll have to prompt for a token approval prior to calling `transferRemote`.
 
-- A Warp Route is a type of [router](/docs/reference/libraries/router) application, a pattern enabling you to link multiple contracts across chains together.
+- A Warp Route is a type of [router](/docs/reference/developer-tools/libraries/router) application, a pattern enabling you to link multiple contracts across chains together.

@@ -324,7 +324,7 @@
           {
             "group": "Relayer",
             "pages": [
-              "docsdocs/operate/relayer/run-relayer",
+              "docs/operate/relayer/run-relayer",
               "docs/operate/relayer/message-filtering",
               "docs/operate/relayer/monitoring-alerting"
             ]
@@ -391,5 +391,8 @@
         ]
       }
     ]
+  },
+  "contextual": {
+    "options": ["copy", "view", "chatgpt", "claude"]
   }
 }

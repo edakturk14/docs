@@ -51,10 +51,11 @@ As a recap - before running a production Validator you need to have:
 
 <Info>
   Experienced operators may prefer to [deploy agents with
-  Terraform](/docs/operate/deploy-with-terraform) or a community-submitted
-  [Ansible playbook](https://github.com/polkachu/hyperlane) instead. This
-  process will automatically create agent keys, Validator buckets, permissions
-  and any other auxiliary setup required to run a Validator cluster on AWS.
+  Terraform](/docs/operate/guides/deploy-with-terraform) or a
+  community-submitted [Ansible playbook](https://github.com/polkachu/hyperlane)
+  instead. This process will automatically create agent keys, Validator buckets,
+  permissions and any other auxiliary setup required to run a Validator cluster
+  on AWS.
 </Info>
 
 #### RPC Configuration
@@ -103,12 +104,12 @@ Like the local setup, there are a few base arguments you should provide when con
 <Info>
   Your Validator takes both command line arguments and environment variables as
   configuration. Take a look at the [agent
-  configuration](/docs/operate/agent-config) page and the [configuration
+  configuration](/docs/operate/config/agent-config) page and the [configuration
   reference](/docs/operate/config/config-reference) for a full list of
   configuration possibilities.
 </Info>
 
-You can also provide the path to additional configuration files as a comma separated list with the [`CONFIG_FILES` environment variable](/docs/operate/config/config-reference#config_files). If you choose to run in Docker, see the docker section of [agent configuration](/docs/operate/agent-config) for tips on mounting your config files into your Docker container.
+You can also provide the path to additional configuration files as a comma separated list with the [`CONFIG_FILES` environment variable](/docs/operate/config/config-reference#config_files). If you choose to run in Docker, see the docker section of [agent configuration](/docs/operate/config/agent-config) for tips on mounting your config files into your Docker container.
 
 ### Setup-specific configuration
 

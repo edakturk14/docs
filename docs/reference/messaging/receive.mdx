@@ -41,7 +41,7 @@ function handle(
 - `messageBody`: Raw bytes content of message body
 
 <Info>
-Sender addresses are left-padded to `bytes32` for compatibility with virtual machines that are addressed differently. The following utility is provided in the [`TypeCasts` library](../libraries/typecasts.mdx) for convenience.
+Sender addresses are left-padded to `bytes32` for compatibility with virtual machines that are addressed differently. The following utility is provided in the [`TypeCasts` library](/docs/reference/developer-tools/libraries/typecasts.mdx) for convenience.
 
 ```solidity
 function bytes32ToAddress(bytes32 _bytes32) internal pure returns (address) {
@@ -55,7 +55,7 @@ function bytes32ToAddress(bytes32 _bytes32) internal pure returns (address) {
 
 The `handle` function should be restricted to the Mailbox address if the contract should only accept calls from interchain messages.
 
-The following utility is provided in the [`MailboxClient` library](../libraries/mailboxclient.mdx) for convenience.
+The following utility is provided in the [`MailboxClient` library](/docs/reference/developer-tools/libraries/mailboxclient.mdx) for convenience.
 
 ```solidity
 modifier onlyMailbox() {
