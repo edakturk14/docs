@@ -6,7 +6,7 @@ Validators expose metrics on the port number specified by the argument . Port is
 
 We recommend using Prometheus to scrape these metrics and Grafana to visualize them, using [this dashboard JSON template](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/84e8c5c218ac5d211c766cf4d5a135aee10e508c/tools/grafana/validator-dashboard-template.json), as seen below. The benefit of this dashboard is that it displays multiple validators at the same time. The screenshot shows metrics grouped by chain or by kubernetes pod.
 
-![Validator Grafana Dashboard Template](/images/docs/operate/validators/assets/images/dashboard-template-validator-e32a2eb79095c9c4758c03dcf85061a2.png)
+![Validator Grafana Dashboard Template](/images/docs/operate/dashboard-template-validator.png)
 
 <Note>
   If running as a Docker image, make sure to port-forward the metrics endpoint

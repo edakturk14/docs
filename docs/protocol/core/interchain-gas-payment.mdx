@@ -70,7 +70,7 @@ Because messages can trigger arbitrary code execution, the Relayer must meter th
 
 Interchain gas payments are facilitated by `InterchainGasPaymaster` (IGP) smart contracts.
 
-These contracts expose the [InterchainGasPaymaster interface](../reference/hooks/interchain-gas.mdx), which allow message senders to pay the Relayer with native tokens on the origin chain to cover the costs of delivering a message on the destination chain.
+These contracts expose the [InterchainGasPaymaster interface](/docs/reference/hooks/interchain-gas), which allow message senders to pay the Relayer with native tokens on the origin chain to cover the costs of delivering a message on the destination chain.
 
 Each `InterchainGasPaymaster` contract corresponds to exactly one Relayer. You can find addresses of the Abacus Works' Relayer under [addresses](/docs/reference/addresses/deployments/mainnet/interchainGasPaymaster).
 
@@ -96,7 +96,7 @@ The `gasLimit` and the `exchangeRate` are configured by the message sender and t
 
 Interchain gas payments are based on a social contract between the message sender and Relayer. In other words, a Relayer may receive interchain gas payments without delivering the corresponding messages. Therefore, when making interchain gas payments, it is recommended to use an IGP contract that is associated with a known and reputable Relayer.
 
-An honest Relayer implementation will honor any successful gas payments made to its IGP, no matter how many tokens were actually paid. By keeping [gas oracles](../reference/hooks/interchain-gas.mdx) up to date, the Relayer can ensure that gas payments succeed if and only if a "fair" price was paid.
+An honest Relayer implementation will honor any successful gas payments made to its IGP, no matter how many tokens were actually paid. By keeping [gas oracles](/docs/reference/hooks/interchain-gas) up to date, the Relayer can ensure that gas payments succeed if and only if a "fair" price was paid.
 
 There are no trust assumptions with respect to Relayers in the Hyperlane protocol, and under no circumstances will a malicious Relayer be able to censor or falsify messages. The worst thing that a Relayer can do is accept payments without delivering a message.
 

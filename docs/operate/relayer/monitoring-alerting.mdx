@@ -6,7 +6,7 @@ The relayer exposes metrics on the port number specified by the argument . Port 
 
 We recommend using Prometheus to scrape these metrics and Grafana to visualize them, using [this dashboard JSON template](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/2f7f714c5b698fedcead9825f52da6ef95f96be1/tools/grafana/easy-relayer-dashboard-template.json), as seen below. The benefit of this dashboard is that it displays multiple validators at the same time. The screenshot shows metrics grouped by chain or by kubernetes pod.
 
-![Relayer Grafana Dashboard Template](/images/docs/operate/relayer/assets/images/dashboard-template-relayer-0a274069167ac38785e382982396c1e7.png)
+![Relayer Grafana Dashboard Template](/images/docs/operate/dashboard-template-relayer.png)
 
 <Note>
   If running as a Docker image, make sure to port-forward the metrics endpoint

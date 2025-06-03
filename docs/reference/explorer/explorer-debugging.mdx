@@ -2,8 +2,6 @@
 title: "Explorer Debugging"
 ---
 
-## Debugging Failed Messages
-
 You'll know that a message failed to process because the message status near the top of the page will show as "Error" and the upper right section of the page will specify a reason why the message wasn't able to be processed.
 
 If your message was not delivered it can be due to several factors.
@@ -29,8 +27,9 @@ interface IMessageRecipient {
 
 <Warning>
   EVM addresses (`address`) must be left-padded with zeroes to be compliant.
-  Refer to the [TypeCasts library](../../reference/libraries/typecasts) for a
-  `pure addressToBytes32` utility function, and the message
+  Refer to the [TypeCasts
+  library](/docs/reference/developer-tools/libraries/typecasts) for a `pure
+  addressToBytes32` utility function, and the message
   [dispatch](../../reference/messaging/send#dispatch) section for other details.
 </Warning>
 
